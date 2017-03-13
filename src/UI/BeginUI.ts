@@ -36,7 +36,7 @@ class BeginUI extends egret.Sprite {
         this.title.y -= 1000;
         super.addChild(this.title);
     }
-    
+
     beginAnimation(): void {
         egret.Tween
             .get(this.title)
@@ -45,13 +45,22 @@ class BeginUI extends egret.Sprite {
             .get(this.btn)
             .to({ y: this.btn.y -500 }, 1000, egret.Ease.sineOut)
     }
+    finishAnimation(call:Function ):void{
+        egret.Tween
+            .get(this.title)
+            .to({ y: this.title.y - 1000 }, 1000, egret.Ease.sineIn)
+        egret.Tween
+            .get(this.btn)
+            .to({ y: this.btn.y +500 }, 1000, egret.Ease.sineIn)
+            .call(call);
+    }
 
     static AddBeginUI(parent: egret.DisplayObjectContainer, call: Function): void {
         let beginUI: BeginUI = new BeginUI();
         parent.addChild(beginUI);
         beginUI.beginAnimation();
         beginUI.addEventListener(TapEvent.NAME, () => {
-            call();
+            beginUI.finishAnimation(call);
         }, this)
 
     }

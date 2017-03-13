@@ -52,12 +52,21 @@ var BeginUI = (function (_super) {
             .get(this.btn)
             .to({ y: this.btn.y - 500 }, 1000, egret.Ease.sineOut);
     };
+    BeginUI.prototype.finishAnimation = function (call) {
+        egret.Tween
+            .get(this.title)
+            .to({ y: this.title.y - 1000 }, 1000, egret.Ease.sineIn);
+        egret.Tween
+            .get(this.btn)
+            .to({ y: this.btn.y + 500 }, 1000, egret.Ease.sineIn)
+            .call(call);
+    };
     BeginUI.AddBeginUI = function (parent, call) {
         var beginUI = new BeginUI();
         parent.addChild(beginUI);
         beginUI.beginAnimation();
         beginUI.addEventListener(TapEvent.NAME, function () {
-            call();
+            beginUI.finishAnimation(call);
         }, this);
     };
     return BeginUI;

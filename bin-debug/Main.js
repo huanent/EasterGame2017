@@ -84,6 +84,7 @@ var Main = (function (_super) {
         Helper.width = this.stage.stageWidth;
         Helper.height = this.stage.stageHeight;
         BeginUI.AddBeginUI(this, function () {
+            alert('游戏场景');
         });
     };
     return Main;
