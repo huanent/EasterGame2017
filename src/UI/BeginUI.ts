@@ -1,5 +1,7 @@
 class BeginUI extends egret.Sprite {
-    tabEvent: TapEvent = new TapEvent(TapEvent.NAME);
+    private tabEvent: TapEvent = new TapEvent(TapEvent.NAME);
+    title: egret.Bitmap;
+    btn: egret.Bitmap;
     /**
      *开始游戏场景
      */
@@ -17,24 +19,37 @@ class BeginUI extends egret.Sprite {
         super.addChild(bg);
     }
     private addBtn(): void {
-        let btn: egret.Bitmap = Helper.getBitmap(R.begin_btn_jpg);
-        Helper.ObjectCenterX(btn)
-        btn.y = Helper.height - 200;
-        super.addChild(btn);
-        btn.touchEnabled = true;
-        btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+        this.btn = Helper.getBitmap(R.begin_btn_jpg);
+        Helper.ObjectCenterX(this.btn)
+        this.btn.y = Helper.height - 200;
+        this.btn.y += 500;
+        super.addChild(this.btn);
+        this.btn.touchEnabled = true;
+        this.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
             this.dispatchEvent(this.tabEvent)
         }, this)
     }
 
     private addTitle(): void {
-        let title: egret.Bitmap = Helper.getBitmap(R.begin_title_jpg);
-        Helper.ObjectCenter(title);
-        super.addChild(title);
+        this.title = Helper.getBitmap(R.begin_title_jpg);
+        Helper.ObjectCenter(this.title);
+        this.title.y -= 1000;
+        super.addChild(this.title);
     }
+    
+    beginAnimation(): void {
+        egret.Tween
+            .get(this.title)
+            .to({ y: this.title.y + 1000 }, 1000, egret.Ease.sineOut)
+        egret.Tween
+            .get(this.btn)
+            .to({ y: this.btn.y -500 }, 1000, egret.Ease.sineOut)
+    }
+
     static AddBeginUI(parent: egret.DisplayObjectContainer, call: Function): void {
         let beginUI: BeginUI = new BeginUI();
         parent.addChild(beginUI);
+        beginUI.beginAnimation();
         beginUI.addEventListener(TapEvent.NAME, () => {
             call();
         }, this)

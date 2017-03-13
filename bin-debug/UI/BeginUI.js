@@ -28,23 +28,34 @@ var BeginUI = (function (_super) {
     };
     BeginUI.prototype.addBtn = function () {
         var _this = this;
-        var btn = Helper.getBitmap(R.begin_btn_jpg);
-        Helper.ObjectCenterX(btn);
-        btn.y = Helper.height - 200;
-        _super.prototype.addChild.call(this, btn);
-        btn.touchEnabled = true;
-        btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+        this.btn = Helper.getBitmap(R.begin_btn_jpg);
+        Helper.ObjectCenterX(this.btn);
+        this.btn.y = Helper.height - 200;
+        this.btn.y += 500;
+        _super.prototype.addChild.call(this, this.btn);
+        this.btn.touchEnabled = true;
+        this.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.dispatchEvent(_this.tabEvent);
         }, this);
     };
     BeginUI.prototype.addTitle = function () {
-        var title = Helper.getBitmap(R.begin_title_jpg);
-        Helper.ObjectCenter(title);
-        _super.prototype.addChild.call(this, title);
+        this.title = Helper.getBitmap(R.begin_title_jpg);
+        Helper.ObjectCenter(this.title);
+        this.title.y -= 1000;
+        _super.prototype.addChild.call(this, this.title);
+    };
+    BeginUI.prototype.beginAnimation = function () {
+        egret.Tween
+            .get(this.title)
+            .to({ y: this.title.y + 1000 }, 1000, egret.Ease.sineOut);
+        egret.Tween
+            .get(this.btn)
+            .to({ y: this.btn.y - 500 }, 1000, egret.Ease.sineOut);
     };
     BeginUI.AddBeginUI = function (parent, call) {
         var beginUI = new BeginUI();
         parent.addChild(beginUI);
+        beginUI.beginAnimation();
         beginUI.addEventListener(TapEvent.NAME, function () {
             call();
         }, this);
