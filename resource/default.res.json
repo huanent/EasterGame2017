@@ -1,0 +1,44 @@
+{
+	"groups": [
+		{
+			"keys": "egret_icon_png,description_json,begin_bg_jpg,begin_btn_jpg,begin_title_jpg",
+			"name": "preload"
+		},
+		{
+			"keys": "game_bg_jpg",
+			"name": "gameui"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/egret_icon.png",
+			"type": "image",
+			"name": "egret_icon_png"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/begin_bg.jpg",
+			"type": "image",
+			"name": "begin_bg_jpg"
+		},
+		{
+			"url": "assets/begin_btn.jpg",
+			"type": "image",
+			"name": "begin_btn_jpg"
+		},
+		{
+			"url": "assets/game_bg.jpg",
+			"type": "image",
+			"name": "game_bg_jpg"
+		},
+		{
+			"name": "begin_title_jpg",
+			"type": "image",
+			"url": "assets/begin_title.jpg"
+		}
+	]
+}
