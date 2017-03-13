@@ -28,7 +28,7 @@ var BeginUI = (function (_super) {
     };
     BeginUI.prototype.addBtn = function () {
         var _this = this;
-        this.btn = Helper.getBitmap(R.begin_btn_jpg);
+        this.btn = Helper.getBitmap(R.begin_btn_png);
         Helper.ObjectCenterX(this.btn);
         this.btn.y = Helper.height - 200;
         this.btn.y += 500;
@@ -39,7 +39,7 @@ var BeginUI = (function (_super) {
         }, this);
     };
     BeginUI.prototype.addTitle = function () {
-        this.title = Helper.getBitmap(R.begin_title_jpg);
+        this.title = Helper.getBitmap(R.begin_title_png);
         Helper.ObjectCenter(this.title);
         this.title.y -= 1000;
         _super.prototype.addChild.call(this, this.title);

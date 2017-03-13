@@ -19,7 +19,7 @@ class BeginUI extends egret.Sprite {
         super.addChild(bg);
     }
     private addBtn(): void {
-        this.btn = Helper.getBitmap(R.begin_btn_jpg);
+        this.btn = Helper.getBitmap(R.begin_btn_png);
         Helper.ObjectCenterX(this.btn)
         this.btn.y = Helper.height - 200;
         this.btn.y += 500;
@@ -31,7 +31,7 @@ class BeginUI extends egret.Sprite {
     }
 
     private addTitle(): void {
-        this.title = Helper.getBitmap(R.begin_title_jpg);
+        this.title = Helper.getBitmap(R.begin_title_png);
         Helper.ObjectCenter(this.title);
         this.title.y -= 1000;
         super.addChild(this.title);

@@ -7,8 +7,8 @@ var R = (function () {
     return R;
 }());
 R.begin_bg_jpg = 'begin_bg_jpg';
-R.begin_btn_jpg = 'begin_btn_jpg';
+R.begin_btn_png = 'begin_btn_png';
 R.game_bg_jpg = 'game_bg_jpg';
-R.begin_title_jpg = 'begin_title_jpg';
+R.begin_title_png = 'begin_title_png';
 __reflect(R.prototype, "R");
 //# sourceMappingURL=ResDefine.js.map

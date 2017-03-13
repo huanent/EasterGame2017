@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "egret_icon_png,description_json,begin_bg_jpg,begin_btn_jpg,begin_title_jpg",
+			"keys": "egret_icon_png,description_json,begin_bg_jpg,begin_title_jpg,begin_btn_png,begin_title_png",
 			"name": "preload"
 		},
 		{
@@ -26,19 +26,24 @@
 			"name": "begin_bg_jpg"
 		},
 		{
-			"url": "assets/begin_btn.jpg",
-			"type": "image",
-			"name": "begin_btn_jpg"
-		},
-		{
 			"url": "assets/game_bg.jpg",
 			"type": "image",
 			"name": "game_bg_jpg"
 		},
 		{
-			"name": "begin_title_jpg",
+			"url": "assets/begin_title.jpg",
 			"type": "image",
-			"url": "assets/begin_title.jpg"
+			"name": "begin_title_jpg"
+		},
+		{
+			"url": "assets/begin_btn.png",
+			"type": "image",
+			"name": "begin_btn_png"
+		},
+		{
+			"url": "assets/begin_title.png",
+			"type": "image",
+			"name": "begin_title_png"
 		}
 	]
 }
