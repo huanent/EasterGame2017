@@ -1,6 +1,6 @@
 class GameUI extends egret.Sprite {
 	rabbitEggList: Array<egret.Sprite> = new Array<egret.Sprite>();
-	markTxt: egret.TextField;
+	barUI: BarUI;
 	/**
 	 *主游戏场景
 	 */
@@ -11,10 +11,20 @@ class GameUI extends egret.Sprite {
 	private initView(): void {
 		this.addBg();
 		this.addBtn();
-		this.addTxt();
-		let t: egret.Timer = new egret.Timer(1000, 0);
-		t.addEventListener(egret.TimerEvent.TIMER, this.addRole, this)
-		t.start()
+		this.addBar();
+		let addRoleTimer: egret.Timer = new egret.Timer(500, 0);
+		addRoleTimer.addEventListener(egret.TimerEvent.TIMER, this.addRole, this)
+		addRoleTimer.start()
+		let timeTimer: egret.Timer = new egret.Timer(1000, 0);
+		timeTimer.addEventListener(egret.TimerEvent.TIMER, () => {
+			this.barUI.timeTxt.text = (new Number(this.barUI.timeTxt.text).valueOf() - 1) + ""
+			if (new Number(this.barUI.timeTxt.text).valueOf() < 0) {
+				addRoleTimer.stop();
+				timeTimer.stop();
+				this.dispatchEvent(new TimeOutEvent(TimeOutEvent.NAME));
+			}
+		}, this)
+		timeTimer.start()
 	}
 	private addBg(): void {
 		let bg: egret.Bitmap = Helper.getBitmap(R.begin_bg_jpg, 720, 1155);
@@ -23,8 +33,8 @@ class GameUI extends egret.Sprite {
 	private addBtn(): void {
 		let btnGet: egret.Bitmap = Helper.getBitmap(R.game_btn_get_png);
 		Helper.ObjectCenterX(btnGet);
-		btnGet.x -= 200;
-		btnGet.y = Helper.height - 300;
+		btnGet.x -= 220;
+		btnGet.y = Helper.height - 250;
 		btnGet.touchEnabled = true;
 		btnGet.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.btnTap(RoleType.rabbit);
@@ -32,19 +42,19 @@ class GameUI extends egret.Sprite {
 		super.addChild(btnGet);
 		let btnBreack: egret.Bitmap = Helper.getBitmap(R.game_btn_break_png);
 		Helper.ObjectCenterX(btnBreack);
-		btnBreack.x += 200;
-		btnBreack.y = Helper.height - 300;
+		btnBreack.x += 220;
+		btnBreack.y = Helper.height - 250;
 		btnBreack.touchEnabled = true;
 		btnBreack.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.btnTap(RoleType.egg);
 		}, this)
 		super.addChild(btnBreack);
 	}
-	private addTxt(): void {
-		this.markTxt = new egret.TextField();
-		Helper.ObjectCenter(this.markTxt);
-		this.markTxt.text = "0";
-		super.addChild(this.markTxt);
+	private addBar(): void {
+		this.barUI = new BarUI();
+		this.barUI.markTxt.text = "0";
+		this.barUI.timeTxt.text = "25";
+		super.addChild(this.barUI);
 	}
 
 	private addRole(): void {
@@ -59,15 +69,15 @@ class GameUI extends egret.Sprite {
 		}
 		Helper.ObjectCenterX(role);
 		let finishX: number = role.x;
-		role.y = 400;
+		role.y = 600;
 		role.scaleX = 0.3;
 		role.scaleY = 0.3;
 		role.x = (Helper.width - role.width * 0.3) * 0.5;
 		super.addChildAt(role, 1);
 		this.rabbitEggList.push(role);
 		egret.Tween.get(role)
-			.to({ y: Helper.height - 400, scaleX: 1, scaleY: 1, x: finishX }, 2000)
-			.to({ y: Helper.height }, 500, egret.Ease.circInOut)
+			.to({ y: Helper.height - 300, scaleX: 1, scaleY: 1, x: finishX }, 1200, egret.Ease.circIn)
+			.to({ y: Helper.height }, 200, egret.Ease.circInOut)
 			.call(() => {
 				this.rabbitEggList.shift();
 				super.removeChild(role);
@@ -79,22 +89,20 @@ class GameUI extends egret.Sprite {
 		let gameUI: GameUI = new GameUI();
 		parent.addChild(gameUI);
 		//gameUI.beginAnimation();
-		// gameUI.addEventListener(TapEvent.NAME, () => {
-		// 	gameUI.finishAnimation(() => {
-		// 		call();
-		// 		parent.removeChild(gameUI);
-		// 	});
-		// }, this)
+		gameUI.addEventListener(TimeOutEvent.NAME, () => {
+			alert("得分："+gameUI.barUI.markTxt.text);
+			parent.removeChild(gameUI);
+		}, this)
 
 	}
 	private btnTap(roleType: RoleType): void {
 		this.rabbitEggList.forEach(element => {
 			if (element.hitTestPoint(Helper.width / 2, Helper.height - 250)) {
-				var role:any =element
+				var role: any = element
 				if (roleType == role.roleType) {
-					this.markTxt.text = (new Number(this.markTxt.text).valueOf() + 10) + ""
+					this.barUI.markTxt.text = (new Number(this.barUI.markTxt.text).valueOf() + 10) + ""
 				} else {
-					this.markTxt.text = (new Number(this.markTxt.text).valueOf() - 10) + ""
+					this.barUI.markTxt.text = (new Number(this.barUI.markTxt.text).valueOf() - 10) + ""
 				}
 				return;
 			}

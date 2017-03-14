@@ -18,12 +18,23 @@ var GameUI = (function (_super) {
         return _this;
     }
     GameUI.prototype.initView = function () {
+        var _this = this;
         this.addBg();
         this.addBtn();
-        this.addTxt();
-        var t = new egret.Timer(1000, 0);
-        t.addEventListener(egret.TimerEvent.TIMER, this.addRole, this);
-        t.start();
+        this.addBar();
+        var addRoleTimer = new egret.Timer(500, 0);
+        addRoleTimer.addEventListener(egret.TimerEvent.TIMER, this.addRole, this);
+        addRoleTimer.start();
+        var timeTimer = new egret.Timer(1000, 0);
+        timeTimer.addEventListener(egret.TimerEvent.TIMER, function () {
+            _this.barUI.timeTxt.text = (new Number(_this.barUI.timeTxt.text).valueOf() - 1) + "";
+            if (new Number(_this.barUI.timeTxt.text).valueOf() < 0) {
+                addRoleTimer.stop();
+                timeTimer.stop();
+                _this.dispatchEvent(new TimeOutEvent(TimeOutEvent.NAME));
+            }
+        }, this);
+        timeTimer.start();
     };
     GameUI.prototype.addBg = function () {
         var bg = Helper.getBitmap(R.begin_bg_jpg, 720, 1155);
@@ -33,8 +44,8 @@ var GameUI = (function (_super) {
         var _this = this;
         var btnGet = Helper.getBitmap(R.game_btn_get_png);
         Helper.ObjectCenterX(btnGet);
-        btnGet.x -= 200;
-        btnGet.y = Helper.height - 300;
+        btnGet.x -= 220;
+        btnGet.y = Helper.height - 250;
         btnGet.touchEnabled = true;
         btnGet.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.btnTap(RoleType.rabbit);
@@ -42,19 +53,19 @@ var GameUI = (function (_super) {
         _super.prototype.addChild.call(this, btnGet);
         var btnBreack = Helper.getBitmap(R.game_btn_break_png);
         Helper.ObjectCenterX(btnBreack);
-        btnBreack.x += 200;
-        btnBreack.y = Helper.height - 300;
+        btnBreack.x += 220;
+        btnBreack.y = Helper.height - 250;
         btnBreack.touchEnabled = true;
         btnBreack.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.btnTap(RoleType.egg);
         }, this);
         _super.prototype.addChild.call(this, btnBreack);
     };
-    GameUI.prototype.addTxt = function () {
-        this.markTxt = new egret.TextField();
-        Helper.ObjectCenter(this.markTxt);
-        this.markTxt.text = "0";
-        _super.prototype.addChild.call(this, this.markTxt);
+    GameUI.prototype.addBar = function () {
+        this.barUI = new BarUI();
+        this.barUI.markTxt.text = "0";
+        this.barUI.timeTxt.text = "25";
+        _super.prototype.addChild.call(this, this.barUI);
     };
     GameUI.prototype.addRole = function () {
         var _this = this;
@@ -69,15 +80,15 @@ var GameUI = (function (_super) {
         }
         Helper.ObjectCenterX(role);
         var finishX = role.x;
-        role.y = 400;
+        role.y = 600;
         role.scaleX = 0.3;
         role.scaleY = 0.3;
         role.x = (Helper.width - role.width * 0.3) * 0.5;
         _super.prototype.addChildAt.call(this, role, 1);
         this.rabbitEggList.push(role);
         egret.Tween.get(role)
-            .to({ y: Helper.height - 400, scaleX: 1, scaleY: 1, x: finishX }, 2000)
-            .to({ y: Helper.height }, 500, egret.Ease.circInOut)
+            .to({ y: Helper.height - 300, scaleX: 1, scaleY: 1, x: finishX }, 1200, egret.Ease.circIn)
+            .to({ y: Helper.height }, 200, egret.Ease.circInOut)
             .call(function () {
             _this.rabbitEggList.shift();
             _super.prototype.removeChild.call(_this, role);
@@ -87,12 +98,10 @@ var GameUI = (function (_super) {
         var gameUI = new GameUI();
         parent.addChild(gameUI);
         //gameUI.beginAnimation();
-        // gameUI.addEventListener(TapEvent.NAME, () => {
-        // 	gameUI.finishAnimation(() => {
-        // 		call();
-        // 		parent.removeChild(gameUI);
-        // 	});
-        // }, this)
+        gameUI.addEventListener(TimeOutEvent.NAME, function () {
+            alert("得分：" + gameUI.barUI.markTxt.text);
+            parent.removeChild(gameUI);
+        }, this);
     };
     GameUI.prototype.btnTap = function (roleType) {
         var _this = this;
@@ -100,10 +109,10 @@ var GameUI = (function (_super) {
             if (element.hitTestPoint(Helper.width / 2, Helper.height - 250)) {
                 var role = element;
                 if (roleType == role.roleType) {
-                    _this.markTxt.text = (new Number(_this.markTxt.text).valueOf() + 10) + "";
+                    _this.barUI.markTxt.text = (new Number(_this.barUI.markTxt.text).valueOf() + 10) + "";
                 }
                 else {
-                    _this.markTxt.text = (new Number(_this.markTxt.text).valueOf() - 10) + "";
+                    _this.barUI.markTxt.text = (new Number(_this.barUI.markTxt.text).valueOf() - 10) + "";
                 }
                 return;
             }

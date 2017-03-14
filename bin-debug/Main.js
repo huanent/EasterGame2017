@@ -93,7 +93,8 @@ var Main = (function (_super) {
         });
     };
     Main.prototype.addGameUI = function () {
-        GameUI.addGameUI(this, function () { });
+        GameUI.addGameUI(this, function () {
+        });
     };
     return Main;
 }(egret.DisplayObjectContainer));

@@ -1,11 +1,11 @@
 {
 	"groups": [
 		{
-			"keys": "egret_icon_png,description_json,begin_bg_jpg,begin_btn_png,begin_title_png",
+			"keys": "egret_icon_png,description_json,begin_bg_jpg,begin_btn_png,begin_title_png,bg_png",
 			"name": "preload"
 		},
 		{
-			"keys": "game_bg_jpg,game_btn_break_png,game_btn_get_png,egg_png,rabbit_png",
+			"keys": "game_bg_jpg,game_btn_break_png,game_btn_get_png,egg_png,rabbit_png,hand-_png,chuizi_png,great_bg_png",
 			"name": "gameui"
 		}
 	],
@@ -59,6 +59,26 @@
 			"url": "assets/rabbit.png",
 			"type": "image",
 			"name": "rabbit_png"
+		},
+		{
+			"url": "assets/bg.png",
+			"type": "image",
+			"name": "bg_png"
+		},
+		{
+			"url": "assets/hand-.png",
+			"type": "image",
+			"name": "hand-_png"
+		},
+		{
+			"url": "assets/chuizi.png",
+			"type": "image",
+			"name": "chuizi_png"
+		},
+		{
+			"url": "assets/great_bg.png",
+			"type": "image",
+			"name": "great_bg_png"
 		}
 	]
 }

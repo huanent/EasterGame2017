@@ -6,13 +6,14 @@ var R = (function () {
     }
     return R;
 }());
-R.begin_bg_jpg = 'begin_bg_jpg';
+R.begin_bg_jpg = 'bg_png';
 R.begin_btn_png = 'begin_btn_png';
-R.game_bg_jpg = 'game_bg_jpg';
+R.game_bg_jpg = 'bg_png';
 R.begin_title_png = 'begin_title_png';
 R.game_btn_break_png = 'game_btn_break_png';
 R.game_btn_get_png = 'game_btn_get_png';
 R.egg_png = 'egg_png';
 R.rabbit_png = 'rabbit_png';
+R.great_bg_png = 'great_bg_png';
 __reflect(R.prototype, "R");
 //# sourceMappingURL=ResDefine.js.map
