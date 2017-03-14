@@ -15,5 +15,7 @@ R.game_btn_get_png = 'game_btn_get_png';
 R.egg_png = 'egg_png';
 R.rabbit_png = 'rabbit_png';
 R.great_bg_png = 'great_bg_png';
+R.hand_png = 'hand-_png';
+R.chuizi_png = 'chuizi_png';
 __reflect(R.prototype, "R");
 //# sourceMappingURL=ResDefine.js.map

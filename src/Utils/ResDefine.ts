@@ -8,4 +8,6 @@ class R {
     static egg_png: string = 'egg_png';
     static rabbit_png: string = 'rabbit_png';
     static great_bg_png: string = 'great_bg_png';
+    static hand_png: string = 'hand-_png';
+    static chuizi_png: string = 'chuizi_png';
 }

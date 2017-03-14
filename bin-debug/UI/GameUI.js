@@ -42,7 +42,7 @@ var GameUI = (function (_super) {
     };
     GameUI.prototype.addBtn = function () {
         var _this = this;
-        var btnGet = Helper.getBitmap(R.game_btn_get_png);
+        var btnGet = new BtnGetUI();
         Helper.ObjectCenterX(btnGet);
         btnGet.x -= 220;
         btnGet.y = Helper.height - 250;
@@ -51,7 +51,7 @@ var GameUI = (function (_super) {
             _this.btnTap(RoleType.rabbit);
         }, this);
         _super.prototype.addChild.call(this, btnGet);
-        var btnBreack = Helper.getBitmap(R.game_btn_break_png);
+        var btnBreack = new BtnBreakUI();
         Helper.ObjectCenterX(btnBreack);
         btnBreack.x += 220;
         btnBreack.y = Helper.height - 250;
@@ -99,7 +99,7 @@ var GameUI = (function (_super) {
         parent.addChild(gameUI);
         //gameUI.beginAnimation();
         gameUI.addEventListener(TimeOutEvent.NAME, function () {
-            alert("得分：" + gameUI.barUI.markTxt.text);
+            alert("得分：" + gameUI.barUI.markTxt.text + "获得宝马一辆");
             parent.removeChild(gameUI);
         }, this);
     };

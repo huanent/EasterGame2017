@@ -31,7 +31,7 @@ class GameUI extends egret.Sprite {
 		super.addChild(bg);
 	}
 	private addBtn(): void {
-		let btnGet: egret.Bitmap = Helper.getBitmap(R.game_btn_get_png);
+		let btnGet = new BtnGetUI();
 		Helper.ObjectCenterX(btnGet);
 		btnGet.x -= 220;
 		btnGet.y = Helper.height - 250;
@@ -40,7 +40,7 @@ class GameUI extends egret.Sprite {
 			this.btnTap(RoleType.rabbit);
 		}, this)
 		super.addChild(btnGet);
-		let btnBreack: egret.Bitmap = Helper.getBitmap(R.game_btn_break_png);
+		let btnBreack = new BtnBreakUI();
 		Helper.ObjectCenterX(btnBreack);
 		btnBreack.x += 220;
 		btnBreack.y = Helper.height - 250;
@@ -90,14 +90,14 @@ class GameUI extends egret.Sprite {
 		parent.addChild(gameUI);
 		//gameUI.beginAnimation();
 		gameUI.addEventListener(TimeOutEvent.NAME, () => {
-			alert("得分："+gameUI.barUI.markTxt.text);
+			alert("得分：" + gameUI.barUI.markTxt.text + "获得宝马一辆");
 			parent.removeChild(gameUI);
 		}, this)
 
 	}
 	private btnTap(roleType: RoleType): void {
 		this.rabbitEggList.forEach(element => {
-			if (element.hitTestPoint(Helper.width / 2, Helper.height - 250)) {
+			if (element.hitTestPoint(Helper.width / 2, Helper.height - 300)) {
 				var role: any = element
 				if (roleType == role.roleType) {
 					this.barUI.markTxt.text = (new Number(this.barUI.markTxt.text).valueOf() + 10) + ""
