@@ -28,7 +28,7 @@ var GameUI = (function (_super) {
         var timeTimer = new egret.Timer(1000, 0);
         timeTimer.addEventListener(egret.TimerEvent.TIMER, function () {
             _this.barUI.timeTxt.text = (new Number(_this.barUI.timeTxt.text).valueOf() - 1) + "";
-            if (new Number(_this.barUI.timeTxt.text).valueOf() < 0) {
+            if (new Number(_this.barUI.timeTxt.text).valueOf() < 1) {
                 addRoleTimer.stop();
                 timeTimer.stop();
                 _this.dispatchEvent(new TimeOutEvent(TimeOutEvent.NAME));
@@ -64,7 +64,7 @@ var GameUI = (function (_super) {
     GameUI.prototype.addBar = function () {
         this.barUI = new BarUI();
         this.barUI.markTxt.text = "0";
-        this.barUI.timeTxt.text = "25";
+        this.barUI.timeTxt.text = "1";
         _super.prototype.addChild.call(this, this.barUI);
     };
     GameUI.prototype.addRole = function () {
@@ -99,14 +99,14 @@ var GameUI = (function (_super) {
         parent.addChild(gameUI);
         //gameUI.beginAnimation();
         gameUI.addEventListener(TimeOutEvent.NAME, function () {
-            alert("得分：" + gameUI.barUI.markTxt.text + "获得宝马一辆");
-            parent.removeChild(gameUI);
+            var regame = new ReGameUI();
+            parent.addChild(regame);
         }, this);
     };
     GameUI.prototype.btnTap = function (roleType) {
         var _this = this;
         this.rabbitEggList.forEach(function (element) {
-            if (element.hitTestPoint(Helper.width / 2, Helper.height - 250)) {
+            if (element.hitTestPoint(Helper.width / 2, Helper.height - 300)) {
                 var role = element;
                 if (roleType == role.roleType) {
                     _this.barUI.markTxt.text = (new Number(_this.barUI.markTxt.text).valueOf() + 10) + "";

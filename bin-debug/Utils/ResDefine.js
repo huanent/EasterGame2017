@@ -17,5 +17,8 @@ R.rabbit_png = 'rabbit_png';
 R.great_bg_png = 'great_bg_png';
 R.hand_png = 'hand-_png';
 R.chuizi_png = 'chuizi_png';
+R.jieguo_bg_png = 'jieguo_bg_png';
+R.jiangli_btn_png = 'jiangli_btn_png';
+R.restart_btn_png = 'restart_btn_png';
 __reflect(R.prototype, "R");
 //# sourceMappingURL=ResDefine.js.map

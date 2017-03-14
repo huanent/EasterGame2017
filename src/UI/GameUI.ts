@@ -18,7 +18,7 @@ class GameUI extends egret.Sprite {
 		let timeTimer: egret.Timer = new egret.Timer(1000, 0);
 		timeTimer.addEventListener(egret.TimerEvent.TIMER, () => {
 			this.barUI.timeTxt.text = (new Number(this.barUI.timeTxt.text).valueOf() - 1) + ""
-			if (new Number(this.barUI.timeTxt.text).valueOf() < 0) {
+			if (new Number(this.barUI.timeTxt.text).valueOf() < 1) {
 				addRoleTimer.stop();
 				timeTimer.stop();
 				this.dispatchEvent(new TimeOutEvent(TimeOutEvent.NAME));
@@ -53,7 +53,7 @@ class GameUI extends egret.Sprite {
 	private addBar(): void {
 		this.barUI = new BarUI();
 		this.barUI.markTxt.text = "0";
-		this.barUI.timeTxt.text = "25";
+		this.barUI.timeTxt.text = "1";
 		super.addChild(this.barUI);
 	}
 
@@ -90,8 +90,8 @@ class GameUI extends egret.Sprite {
 		parent.addChild(gameUI);
 		//gameUI.beginAnimation();
 		gameUI.addEventListener(TimeOutEvent.NAME, () => {
-			alert("得分：" + gameUI.barUI.markTxt.text + "获得宝马一辆");
-			parent.removeChild(gameUI);
+			let regame=new ReGameUI();
+			parent.addChild(regame);
 		}, this)
 
 	}

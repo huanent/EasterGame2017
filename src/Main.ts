@@ -99,6 +99,7 @@ class Main extends egret.DisplayObjectContainer {
         })
     }
     private addGameUI(): void {
+        RES.loadGroup("regameui");
         GameUI.addGameUI(this, () => { 
           
         });

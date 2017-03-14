@@ -10,4 +10,7 @@ class R {
     static great_bg_png: string = 'great_bg_png';
     static hand_png: string = 'hand-_png';
     static chuizi_png: string = 'chuizi_png';
+    static jieguo_bg_png:string='jieguo_bg_png';
+    static jiangli_btn_png:string='jiangli_btn_png';
+    static restart_btn_png:string='restart_btn_png';
 }
