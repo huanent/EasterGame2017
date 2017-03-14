@@ -83,9 +83,17 @@ var Main = (function (_super) {
     Main.prototype.createGameScene = function () {
         Helper.width = this.stage.stageWidth;
         Helper.height = this.stage.stageHeight;
-        BeginUI.AddBeginUI(this, function () {
-            alert('游戏场景');
+        this.addBeginUI();
+        RES.loadGroup("gameui");
+    };
+    Main.prototype.addBeginUI = function () {
+        var _this = this;
+        BeginUI.addBeginUI(this, function () {
+            _this.addGameUI();
         });
+    };
+    Main.prototype.addGameUI = function () {
+        GameUI.addGameUI(this, function () { });
     };
     return Main;
 }(egret.DisplayObjectContainer));

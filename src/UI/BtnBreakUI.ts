@@ -1,0 +1,4 @@
+class BtnBreakUI {
+	public constructor() {
+	}
+}

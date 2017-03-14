@@ -90,9 +90,16 @@ class Main extends egret.DisplayObjectContainer {
     private createGameScene() {
         Helper.width = this.stage.stageWidth;
         Helper.height = this.stage.stageHeight;
-        BeginUI.AddBeginUI(this, () => {
-            alert('游戏场景');
+        this.addBeginUI();
+        RES.loadGroup("gameui");
+    }
+    private addBeginUI(): void {
+        BeginUI.addBeginUI(this, () => {
+            this.addGameUI();
         })
+    }
+    private addGameUI(): void {
+        GameUI.addGameUI(this, () => { });
     }
 }
 

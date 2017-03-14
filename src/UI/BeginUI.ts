@@ -55,12 +55,15 @@ class BeginUI extends egret.Sprite {
             .call(call);
     }
 
-    static AddBeginUI(parent: egret.DisplayObjectContainer, call: Function): void {
+    static addBeginUI(parent: egret.DisplayObjectContainer, call: Function): void {
         let beginUI: BeginUI = new BeginUI();
         parent.addChild(beginUI);
         beginUI.beginAnimation();
         beginUI.addEventListener(TapEvent.NAME, () => {
-            beginUI.finishAnimation(call);
+            beginUI.finishAnimation(()=>{
+                call();
+                parent.removeChild(beginUI);
+            });
         }, this)
 
     }

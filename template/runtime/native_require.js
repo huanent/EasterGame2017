@@ -12,10 +12,13 @@ var game_file_list = [
 	"bin-debug/Event/TapEvent.js",
 	"bin-debug/Main.js",
 	"bin-debug/UI/BeginUI.js",
+	"bin-debug/UI/EggUI.js",
 	"bin-debug/UI/GameUI.js",
 	"bin-debug/UI/LoadingUI.js",
+	"bin-debug/UI/RabbitUI.js",
 	"bin-debug/Utils/Helper.js",
 	"bin-debug/Utils/ResDefine.js",
+	"bin-debug/Utils/RoleType.js",
 	//----auto game_file_list end----
 ];
 

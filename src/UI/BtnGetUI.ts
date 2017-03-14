@@ -1,0 +1,4 @@
+class BtnGetUI {
+	public constructor() {
+	}
+}

@@ -61,12 +61,15 @@ var BeginUI = (function (_super) {
             .to({ y: this.btn.y + 500 }, 1000, egret.Ease.sineIn)
             .call(call);
     };
-    BeginUI.AddBeginUI = function (parent, call) {
+    BeginUI.addBeginUI = function (parent, call) {
         var beginUI = new BeginUI();
         parent.addChild(beginUI);
         beginUI.beginAnimation();
         beginUI.addEventListener(TapEvent.NAME, function () {
-            beginUI.finishAnimation(call);
+            beginUI.finishAnimation(function () {
+                call();
+                parent.removeChild(beginUI);
+            });
         }, this);
     };
     return BeginUI;
