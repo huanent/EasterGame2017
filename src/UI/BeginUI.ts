@@ -32,15 +32,15 @@ class BeginUI extends egret.Sprite {
 
     private addTitle(): void {
         this.title = Helper.getBitmap(R.begin_title_png);
-        Helper.ObjectCenter(this.title);
-        this.title.y -= 1000;
+        Helper.ObjectCenterX(this.title);
+        this.title.y-=300
         super.addChild(this.title);
     }
 
     beginAnimation(): void {
         egret.Tween
             .get(this.title)
-            .to({ y: this.title.y + 1000 }, 1000, egret.Ease.sineOut)
+            .to({ y: this.title.y + 650 }, 1000, egret.Ease.sineOut)
         egret.Tween
             .get(this.btn)
             .to({ y: this.btn.y -500 }, 1000, egret.Ease.sineOut)
@@ -48,7 +48,7 @@ class BeginUI extends egret.Sprite {
     finishAnimation(call:Function ):void{
         egret.Tween
             .get(this.title)
-            .to({ y: this.title.y - 1000 }, 1000, egret.Ease.sineIn)
+            .to({ y: this.title.y - 650 }, 1000, egret.Ease.sineIn)
         egret.Tween
             .get(this.btn)
             .to({ y: this.btn.y +500 }, 1000, egret.Ease.sineIn)

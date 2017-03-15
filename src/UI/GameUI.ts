@@ -33,8 +33,8 @@ class GameUI extends egret.Sprite {
 	private addBtn(): void {
 		let btnGet = new BtnGetUI();
 		Helper.ObjectCenterX(btnGet);
-		btnGet.x -= 230;
-		btnGet.y = Helper.height - 220;
+		btnGet.x -= 253;
+		btnGet.y = Helper.height - 184;
 		btnGet.touchEnabled = true;
 		btnGet.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.btnTap(RoleType.rabbit);
@@ -42,8 +42,8 @@ class GameUI extends egret.Sprite {
 		super.addChild(btnGet);
 		let btnBreack = new BtnBreakUI();
 		Helper.ObjectCenterX(btnBreack);
-		btnBreack.x += 230;
-		btnBreack.y = Helper.height - 220;
+		btnBreack.x += 253;
+		btnBreack.y = Helper.height - 184;
 		btnBreack.touchEnabled = true;
 		btnBreack.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.btnTap(RoleType.egg);

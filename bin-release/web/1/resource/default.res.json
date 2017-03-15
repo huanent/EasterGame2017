@@ -7,6 +7,10 @@
 		{
 			"keys": "game_bg_jpg,game_btn_break_png,game_btn_get_png,egg_png,rabbit_png,hand-_png,chuizi_png,great_bg_png",
 			"name": "gameui"
+		},
+		{
+			"keys": "jiangli_btn_png,jieguo_bg_png,restart_btn_png",
+			"name": "regameui"
 		}
 	],
 	"resources": [
@@ -79,6 +83,21 @@
 			"url": "assets/great_bg.png",
 			"type": "image",
 			"name": "great_bg_png"
+		},
+		{
+			"url": "assets/jiangli_btn.png",
+			"type": "image",
+			"name": "jiangli_btn_png"
+		},
+		{
+			"url": "assets/jieguo_bg.png",
+			"type": "image",
+			"name": "jieguo_bg_png"
+		},
+		{
+			"url": "assets/restart_btn.png",
+			"type": "image",
+			"name": "restart_btn_png"
 		}
 	]
 }

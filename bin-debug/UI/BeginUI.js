@@ -40,14 +40,14 @@ var BeginUI = (function (_super) {
     };
     BeginUI.prototype.addTitle = function () {
         this.title = Helper.getBitmap(R.begin_title_png);
-        Helper.ObjectCenter(this.title);
-        this.title.y -= 1000;
+        Helper.ObjectCenterX(this.title);
+        this.title.y -= 300;
         _super.prototype.addChild.call(this, this.title);
     };
     BeginUI.prototype.beginAnimation = function () {
         egret.Tween
             .get(this.title)
-            .to({ y: this.title.y + 1000 }, 1000, egret.Ease.sineOut);
+            .to({ y: this.title.y + 650 }, 1000, egret.Ease.sineOut);
         egret.Tween
             .get(this.btn)
             .to({ y: this.btn.y - 500 }, 1000, egret.Ease.sineOut);
@@ -55,7 +55,7 @@ var BeginUI = (function (_super) {
     BeginUI.prototype.finishAnimation = function (call) {
         egret.Tween
             .get(this.title)
-            .to({ y: this.title.y - 1000 }, 1000, egret.Ease.sineIn);
+            .to({ y: this.title.y - 650 }, 1000, egret.Ease.sineIn);
         egret.Tween
             .get(this.btn)
             .to({ y: this.btn.y + 500 }, 1000, egret.Ease.sineIn)
