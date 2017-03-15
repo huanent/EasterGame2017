@@ -11,6 +11,10 @@
 		{
 			"keys": "jiangli_btn_png,jieguo_bg_png,restart_btn_png",
 			"name": "regameui"
+		},
+		{
+			"keys": "pic6_png,pic5_png,pic4_png,pic3_png,pic2_png,pic1_png",
+			"name": "load"
 		}
 	],
 	"resources": [
@@ -98,6 +102,36 @@
 			"url": "assets/restart_btn.png",
 			"type": "image",
 			"name": "restart_btn_png"
+		},
+		{
+			"url": "assets/pic1.png",
+			"type": "image",
+			"name": "pic1_png"
+		},
+		{
+			"url": "assets/pic2.png",
+			"type": "image",
+			"name": "pic2_png"
+		},
+		{
+			"url": "assets/pic3.png",
+			"type": "image",
+			"name": "pic3_png"
+		},
+		{
+			"url": "assets/pic4.png",
+			"type": "image",
+			"name": "pic4_png"
+		},
+		{
+			"url": "assets/pic5.png",
+			"type": "image",
+			"name": "pic5_png"
+		},
+		{
+			"url": "assets/pic6.png",
+			"type": "image",
+			"name": "pic6_png"
 		}
 	]
 }

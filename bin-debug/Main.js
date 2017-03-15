@@ -14,10 +14,6 @@ var Main = (function (_super) {
         return _this;
     }
     Main.prototype.onAddToStage = function (event) {
-        //设置加载进度界面
-        //Config to load process interface
-        this.loadingView = new LoadingUI();
-        this.stage.addChild(this.loadingView);
         //初始化Resource资源加载库
         //initiate Resource loading library
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
@@ -31,20 +27,25 @@ var Main = (function (_super) {
         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
         RES.addEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
-        RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
         RES.addEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
-        RES.loadGroup("preload");
+        RES.loadGroup("load");
     };
     /**
      * preload资源组加载完成
      * Preload resource group is loaded
      */
     Main.prototype.onResourceLoadComplete = function (event) {
+        if (event.groupName == "load") {
+            this.loadingView = new LoadingUI();
+            this.stage.addChild(this.loadingView);
+            egret.Tween.get(this.loadingView).wait(3000).call(function () {
+                RES.loadGroup("preload");
+            });
+        }
         if (event.groupName == "preload") {
             this.stage.removeChild(this.loadingView);
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
             RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
             this.createGameScene();
         }
@@ -66,15 +67,6 @@ var Main = (function (_super) {
         //忽略加载失败的项目
         //Ignore the loading failed projects
         this.onResourceLoadComplete(event);
-    };
-    /**
-     * preload资源组加载进度
-     * Loading process of preload resource group
-     */
-    Main.prototype.onResourceProgress = function (event) {
-        if (event.groupName == "preload") {
-            this.loadingView.setProgress(event.itemsLoaded, event.itemsTotal);
-        }
     };
     /**
      * 创建游戏场景

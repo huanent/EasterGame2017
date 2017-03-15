@@ -106,8 +106,26 @@ class GameUI extends egret.Sprite {
 				var role: any = element
 				if (roleType == role.roleType) {
 					this.barUI.markTxt.text = (new Number(this.barUI.markTxt.text).valueOf() + 10) + ""
+					let addMark=new egret.TextField();
+					addMark.size=60;
+					addMark.text='+10';
+					addMark.textColor=0xffffff;
+					Helper.ObjectCenter(addMark);
+					super.addChild(addMark);
+					egret.Tween.get(addMark).to({y:addMark.y-100},1000).call(()=>{
+						super.removeChild(addMark);
+					});
 				} else {
 					this.barUI.markTxt.text = (new Number(this.barUI.markTxt.text).valueOf() - 10) + ""
+					let removeMark=new egret.TextField();
+					removeMark.size=60;
+					removeMark.text='-10';
+					removeMark.textColor=0xff0000;
+					Helper.ObjectCenter(removeMark);
+					super.addChild(removeMark);
+					egret.Tween.get(removeMark).to({y:removeMark.y-100},1000).call(()=>{
+						super.removeChild(removeMark);
+					});
 				}
 				return;
 			}
