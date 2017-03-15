@@ -93,8 +93,10 @@ var Main = (function (_super) {
         });
     };
     Main.prototype.addGameUI = function () {
+        var _this = this;
         RES.loadGroup("regameui");
         GameUI.addGameUI(this, function () {
+            _this.addBeginUI();
         });
     };
     return Main;

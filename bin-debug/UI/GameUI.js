@@ -44,8 +44,8 @@ var GameUI = (function (_super) {
         var _this = this;
         var btnGet = new BtnGetUI();
         Helper.ObjectCenterX(btnGet);
-        btnGet.x -= 220;
-        btnGet.y = Helper.height - 250;
+        btnGet.x -= 230;
+        btnGet.y = Helper.height - 220;
         btnGet.touchEnabled = true;
         btnGet.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.btnTap(RoleType.rabbit);
@@ -53,8 +53,8 @@ var GameUI = (function (_super) {
         _super.prototype.addChild.call(this, btnGet);
         var btnBreack = new BtnBreakUI();
         Helper.ObjectCenterX(btnBreack);
-        btnBreack.x += 220;
-        btnBreack.y = Helper.height - 250;
+        btnBreack.x += 230;
+        btnBreack.y = Helper.height - 220;
         btnBreack.touchEnabled = true;
         btnBreack.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.btnTap(RoleType.egg);
@@ -64,7 +64,7 @@ var GameUI = (function (_super) {
     GameUI.prototype.addBar = function () {
         this.barUI = new BarUI();
         this.barUI.markTxt.text = "0";
-        this.barUI.timeTxt.text = "1";
+        this.barUI.timeTxt.text = "25";
         _super.prototype.addChild.call(this, this.barUI);
     };
     GameUI.prototype.addRole = function () {
@@ -87,26 +87,32 @@ var GameUI = (function (_super) {
         _super.prototype.addChildAt.call(this, role, 1);
         this.rabbitEggList.push(role);
         egret.Tween.get(role)
-            .to({ y: Helper.height - 300, scaleX: 1, scaleY: 1, x: finishX }, 1200, egret.Ease.circIn)
-            .to({ y: Helper.height }, 200, egret.Ease.circInOut)
+            .to({ y: Helper.height - 300, scaleX: 1, scaleY: 1, x: finishX }, 1500, egret.Ease.circIn)
+            .to({ y: Helper.height }, 500, egret.Ease.circInOut)
             .call(function () {
             _this.rabbitEggList.shift();
             _super.prototype.removeChild.call(_this, role);
         });
     };
     GameUI.addGameUI = function (parent, call) {
+        var _this = this;
         var gameUI = new GameUI();
         parent.addChild(gameUI);
         //gameUI.beginAnimation();
         gameUI.addEventListener(TimeOutEvent.NAME, function () {
-            var regame = new ReGameUI();
+            var regame = new ReGameUI(gameUI.barUI.markTxt.text);
             parent.addChild(regame);
+            regame.addEventListener(TapEvent.NAME, function () {
+                parent.removeChild(regame);
+                parent.removeChild(gameUI);
+                call();
+            }, _this);
         }, this);
     };
     GameUI.prototype.btnTap = function (roleType) {
         var _this = this;
         this.rabbitEggList.forEach(function (element) {
-            if (element.hitTestPoint(Helper.width / 2, Helper.height - 300)) {
+            if (element.hitTestPoint(Helper.width / 2, Helper.height - 165)) {
                 var role = element;
                 if (roleType == role.roleType) {
                     _this.barUI.markTxt.text = (new Number(_this.barUI.markTxt.text).valueOf() + 10) + "";
