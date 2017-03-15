@@ -90,6 +90,7 @@ class Main extends egret.DisplayObjectContainer {
     private createGameScene() {
         Helper.width = this.stage.stageWidth;
         Helper.height = this.stage.stageHeight;
+        this.stage.scaleMode = egret.StageScaleMode.NO_BORDER
         this.addBeginUI();
         RES.loadGroup("gameui");
     }
@@ -100,10 +101,10 @@ class Main extends egret.DisplayObjectContainer {
     }
     private addGameUI(): void {
         RES.loadGroup("regameui");
-        GameUI.addGameUI(this, () => { 
-          this.addBeginUI();
+        GameUI.addGameUI(this, () => {
+            this.addBeginUI();
         });
-        
+
     }
 }
 

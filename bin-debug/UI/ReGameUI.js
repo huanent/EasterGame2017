@@ -15,7 +15,7 @@ var ReGameUI = (function (_super) {
         var _this = _super.call(this) || this;
         var bg = new egret.Shape();
         bg.graphics.beginFill(0, 0.8);
-        bg.graphics.drawRect(0, 0, Helper.width, Helper.height);
+        bg.graphics.drawRect(-1, -1, Helper.width + 1, Helper.height + 1);
         bg.graphics.endFill();
         bg.touchEnabled = true;
         _super.prototype.addChild.call(_this, bg);

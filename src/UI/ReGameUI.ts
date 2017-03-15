@@ -6,7 +6,7 @@ class ReGameUI extends egret.Sprite {
 		super();
 		let bg=new egret.Shape();
 		bg.graphics.beginFill(0,0.8);
-		bg.graphics.drawRect(0,0,Helper.width,Helper.height);
+		bg.graphics.drawRect(-1,-1,Helper.width+1,Helper.height+1);
 		bg.graphics.endFill();
 		bg.touchEnabled=true;
 		super.addChild(bg);

@@ -83,6 +83,7 @@ var Main = (function (_super) {
     Main.prototype.createGameScene = function () {
         Helper.width = this.stage.stageWidth;
         Helper.height = this.stage.stageHeight;
+        this.stage.scaleMode = egret.StageScaleMode.NO_BORDER;
         this.addBeginUI();
         RES.loadGroup("gameui");
     };
