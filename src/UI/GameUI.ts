@@ -84,7 +84,7 @@ class GameUI extends egret.Sprite {
 			});
 	}
 
-	static addGameUI(parent: egret.DisplayObjectContainer, call: Function): void {
+	static addGameUI(parent: egret.DisplayObjectContainer, call: Function): egret.Sprite {
 
 		let gameUI: GameUI = new GameUI();
 		parent.addChild(gameUI);
@@ -98,7 +98,7 @@ class GameUI extends egret.Sprite {
 				call();
 			},this)
 		}, this)
-
+		return gameUI;
 	}
 	private btnTap(roleType: RoleType): void {
 		this.rabbitEggList.forEach(element => {

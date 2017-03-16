@@ -38,16 +38,18 @@ class Main extends egret.DisplayObjectContainer {
         if (event.groupName == "load") {
             this.loadingView = new LoadingUI();
             this.stage.addChild(this.loadingView);
-            egret.Tween.get(this.loadingView).wait(0).call(() => {
-                RES.loadGroup("preload");
-            });
+            RES.loadGroup("preload");
         }
         if (event.groupName == "preload") {
-            this.stage.removeChild(this.loadingView);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
-            RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
-            this.createGameScene();
+            this.musicPlayUI = this.musicPlayUI == null ? new MusicPlayUI() : this.musicPlayUI;
+            this.musicPlayUI.addEventListener(TimeOutEvent.NAME, () => {
+                this.stage.removeChild(this.loadingView);
+                RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+                RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
+                RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
+                this.createGameScene();
+            }, this)
+
         }
     }
 
@@ -72,7 +74,8 @@ class Main extends egret.DisplayObjectContainer {
     }
 
     private textfield: egret.TextField;
-
+    private musicPlayUI: MusicPlayUI;
+    private isfirst: boolean = true;
     /**
      * 创建游戏场景
      * Create a game scene
@@ -85,16 +88,23 @@ class Main extends egret.DisplayObjectContainer {
         RES.loadGroup("gameui");
     }
     private addBeginUI(): void {
-        BeginUI.addBeginUI(this, () => {
+        let beginUI = BeginUI.addBeginUI(this, () => {
             this.addGameUI();
         })
+        if (this.isfirst) {
+            beginUI.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+                this.musicPlayUI.musicControl = this.musicPlayUI.music.play();
+            }, this);
+        }
+
     }
     private addGameUI(): void {
         RES.loadGroup("regameui");
-        GameUI.addGameUI(this, () => {
+        let gameUI = GameUI.addGameUI(this, () => {
             this.addBeginUI();
+            this.isfirst = false;
         });
-
+        gameUI.addChild(this.musicPlayUI);
     }
 }
 

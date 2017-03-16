@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "egret_icon_png,description_json,begin_bg_jpg,begin_btn_png,begin_title_png,bg_png",
+			"keys": "egret_icon_png,description_json,begin_bg_jpg,begin_btn_png,begin_title_png,bg_png,icon_music_close_png,icon_music_open_png,pz_mp3",
 			"name": "preload"
 		},
 		{
@@ -132,6 +132,21 @@
 			"url": "assets/pic6.png",
 			"type": "image",
 			"name": "pic6_png"
+		},
+		{
+			"name": "icon_music_close_png",
+			"type": "image",
+			"url": "assets/icon_music_close.png"
+		},
+		{
+			"name": "icon_music_open_png",
+			"type": "image",
+			"url": "assets/icon_music_open.png"
+		},
+		{
+			"name": "pz_mp3",
+			"type": "sound",
+			"url": "assets/pz.mp3"
 		}
 	]
 }

@@ -12,13 +12,14 @@ class BeginUI extends egret.Sprite {
     private initView(): void {
         this.addBg();
         this.addTitle();
-        this.addBtn();
+        this.addBeginBtn();
+        
     }
     private addBg(): void {
         let bg: egret.Bitmap = Helper.getBitmap(R.begin_bg_jpg, 720, 1155);
         super.addChild(bg);
     }
-    private addBtn(): void {
+    private addBeginBtn(): void {
         this.btn = Helper.getBitmap(R.begin_btn_png);
         Helper.ObjectCenterX(this.btn)
         this.btn.y = Helper.height - 200;
@@ -33,7 +34,7 @@ class BeginUI extends egret.Sprite {
     private addTitle(): void {
         this.title = Helper.getBitmap(R.begin_title_png);
         Helper.ObjectCenterX(this.title);
-        this.title.y-=300
+        this.title.y -= 300
         super.addChild(this.title);
     }
 
@@ -43,28 +44,28 @@ class BeginUI extends egret.Sprite {
             .to({ y: this.title.y + 650 }, 1000, egret.Ease.sineOut)
         egret.Tween
             .get(this.btn)
-            .to({ y: this.btn.y -500 }, 1000, egret.Ease.sineOut)
+            .to({ y: this.btn.y - 500 }, 1000, egret.Ease.sineOut)
     }
-    finishAnimation(call:Function ):void{
+    finishAnimation(call: Function): void {
         egret.Tween
             .get(this.title)
             .to({ y: this.title.y - 650 }, 1000, egret.Ease.sineIn)
         egret.Tween
             .get(this.btn)
-            .to({ y: this.btn.y +500 }, 1000, egret.Ease.sineIn)
+            .to({ y: this.btn.y + 500 }, 1000, egret.Ease.sineIn)
             .call(call);
     }
 
-    static addBeginUI(parent: egret.DisplayObjectContainer, call: Function): void {
+    static addBeginUI(parent: egret.DisplayObjectContainer, call: Function): BeginUI {
         let beginUI: BeginUI = new BeginUI();
         parent.addChild(beginUI);
         beginUI.beginAnimation();
         beginUI.addEventListener(TapEvent.NAME, () => {
-            beginUI.finishAnimation(()=>{
+            beginUI.finishAnimation(() => {
                 call();
                 parent.removeChild(beginUI);
             });
         }, this)
-
+        return beginUI;
     }
 }

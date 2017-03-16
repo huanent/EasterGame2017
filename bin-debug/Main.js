@@ -10,6 +10,7 @@ var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
         var _this = _super.call(this) || this;
+        _this.isfirst = true;
         _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
         return _this;
     }
@@ -35,19 +36,21 @@ var Main = (function (_super) {
      * Preload resource group is loaded
      */
     Main.prototype.onResourceLoadComplete = function (event) {
+        var _this = this;
         if (event.groupName == "load") {
             this.loadingView = new LoadingUI();
             this.stage.addChild(this.loadingView);
-            egret.Tween.get(this.loadingView).wait(3000).call(function () {
-                RES.loadGroup("preload");
-            });
+            RES.loadGroup("preload");
         }
         if (event.groupName == "preload") {
-            this.stage.removeChild(this.loadingView);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
-            RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
-            this.createGameScene();
+            this.musicPlayUI = this.musicPlayUI == null ? new MusicPlayUI() : this.musicPlayUI;
+            this.musicPlayUI.addEventListener(TimeOutEvent.NAME, function () {
+                _this.stage.removeChild(_this.loadingView);
+                RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, _this.onResourceLoadComplete, _this);
+                RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, _this.onResourceLoadError, _this);
+                RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, _this.onItemLoadError, _this);
+                _this.createGameScene();
+            }, this);
         }
     };
     /**
@@ -81,16 +84,23 @@ var Main = (function (_super) {
     };
     Main.prototype.addBeginUI = function () {
         var _this = this;
-        BeginUI.addBeginUI(this, function () {
+        var beginUI = BeginUI.addBeginUI(this, function () {
             _this.addGameUI();
         });
+        if (this.isfirst) {
+            beginUI.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+                _this.musicPlayUI.musicControl = _this.musicPlayUI.music.play();
+            }, this);
+        }
     };
     Main.prototype.addGameUI = function () {
         var _this = this;
         RES.loadGroup("regameui");
-        GameUI.addGameUI(this, function () {
+        var gameUI = GameUI.addGameUI(this, function () {
             _this.addBeginUI();
+            _this.isfirst = false;
         });
+        gameUI.addChild(this.musicPlayUI);
     };
     return Main;
 }(egret.DisplayObjectContainer));

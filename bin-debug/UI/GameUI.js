@@ -108,6 +108,7 @@ var GameUI = (function (_super) {
                 call();
             }, _this);
         }, this);
+        return gameUI;
     };
     GameUI.prototype.btnTap = function (roleType) {
         var _this = this;

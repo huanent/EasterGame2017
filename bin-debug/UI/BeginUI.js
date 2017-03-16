@@ -20,13 +20,13 @@ var BeginUI = (function (_super) {
     BeginUI.prototype.initView = function () {
         this.addBg();
         this.addTitle();
-        this.addBtn();
+        this.addBeginBtn();
     };
     BeginUI.prototype.addBg = function () {
         var bg = Helper.getBitmap(R.begin_bg_jpg, 720, 1155);
         _super.prototype.addChild.call(this, bg);
     };
-    BeginUI.prototype.addBtn = function () {
+    BeginUI.prototype.addBeginBtn = function () {
         var _this = this;
         this.btn = Helper.getBitmap(R.begin_btn_png);
         Helper.ObjectCenterX(this.btn);
@@ -71,6 +71,7 @@ var BeginUI = (function (_super) {
                 parent.removeChild(beginUI);
             });
         }, this);
+        return beginUI;
     };
     return BeginUI;
 }(egret.Sprite));
