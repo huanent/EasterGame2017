@@ -14,6 +14,7 @@ var GameUI = (function (_super) {
     function GameUI() {
         var _this = _super.call(this) || this;
         _this.rabbitEggList = new Array();
+        _this.timeSpan = 0;
         _this.initView();
         return _this;
     }
@@ -115,29 +116,36 @@ var GameUI = (function (_super) {
         this.rabbitEggList.forEach(function (element) {
             if (element.hitTestPoint(Helper.width / 2, Helper.height - 165)) {
                 var role = element;
-                if (roleType == role.roleType) {
-                    _this.barUI.markTxt.text = (new Number(_this.barUI.markTxt.text).valueOf() + 10) + "";
-                    var addMark_1 = new egret.TextField();
-                    addMark_1.size = 60;
-                    addMark_1.text = '+10';
-                    addMark_1.textColor = 0xffffff;
-                    Helper.ObjectCenter(addMark_1);
-                    _super.prototype.addChild.call(_this, addMark_1);
-                    egret.Tween.get(addMark_1).to({ y: addMark_1.y - 100 }, 1000).call(function () {
-                        _super.prototype.removeChild.call(_this, addMark_1);
-                    });
-                }
-                else {
-                    _this.barUI.markTxt.text = (new Number(_this.barUI.markTxt.text).valueOf() - 10) + "";
-                    var removeMark_1 = new egret.TextField();
-                    removeMark_1.size = 60;
-                    removeMark_1.text = '-10';
-                    removeMark_1.textColor = 0xff0000;
-                    Helper.ObjectCenter(removeMark_1);
-                    _super.prototype.addChild.call(_this, removeMark_1);
-                    egret.Tween.get(removeMark_1).to({ y: removeMark_1.y - 100 }, 1000).call(function () {
-                        _super.prototype.removeChild.call(_this, removeMark_1);
-                    });
+                var nowDate = Date.now();
+                if (nowDate - _this.timeSpan > 400) {
+                    _this.timeSpan = nowDate;
+                    console.log(nowDate);
+                    if (roleType == role.roleType) {
+                        _this.barUI.markTxt.text = (new Number(_this.barUI.markTxt.text).valueOf() + 10) + "";
+                        var addMark_1 = new egret.TextField();
+                        addMark_1.size = 60;
+                        addMark_1.text = '+10';
+                        addMark_1.textColor = 0xffffff;
+                        Helper.ObjectCenter(addMark_1);
+                        _super.prototype.addChild.call(_this, addMark_1);
+                        egret.Tween.get(addMark_1).to({ y: addMark_1.y - 100 }, 1000).call(function () {
+                            _super.prototype.removeChild.call(_this, addMark_1);
+                        });
+                    }
+                    else {
+                        if (_this.barUI.markTxt.text != "0") {
+                            _this.barUI.markTxt.text = (new Number(_this.barUI.markTxt.text).valueOf() - 10) + "";
+                            var removeMark_1 = new egret.TextField();
+                            removeMark_1.size = 60;
+                            removeMark_1.text = '-10';
+                            removeMark_1.textColor = 0xff0000;
+                            Helper.ObjectCenter(removeMark_1);
+                            _super.prototype.addChild.call(_this, removeMark_1);
+                            egret.Tween.get(removeMark_1).to({ y: removeMark_1.y - 100 }, 1000).call(function () {
+                                _super.prototype.removeChild.call(_this, removeMark_1);
+                            });
+                        }
+                    }
                 }
                 return;
             }

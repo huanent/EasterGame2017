@@ -1,6 +1,7 @@
 class GameUI extends egret.Sprite {
 	rabbitEggList: Array<egret.Sprite> = new Array<egret.Sprite>();
 	barUI: BarUI;
+	timeSpan: number=0;
 	/**
 	 *主游戏场景
 	 */
@@ -90,42 +91,49 @@ class GameUI extends egret.Sprite {
 		parent.addChild(gameUI);
 		//gameUI.beginAnimation();
 		gameUI.addEventListener(TimeOutEvent.NAME, () => {
-			let regame=new ReGameUI(gameUI.barUI.markTxt.text);
+			let regame = new ReGameUI(gameUI.barUI.markTxt.text);
 			parent.addChild(regame);
-			regame.addEventListener(TapEvent.NAME,()=>{
+			regame.addEventListener(TapEvent.NAME, () => {
 				parent.removeChild(regame);
 				parent.removeChild(gameUI);
 				call();
-			},this)
+			}, this)
 		}, this)
 		return gameUI;
 	}
 	private btnTap(roleType: RoleType): void {
 		this.rabbitEggList.forEach(element => {
 			if (element.hitTestPoint(Helper.width / 2, Helper.height - 165)) {
-				var role: any = element
-				if (roleType == role.roleType) {
-					this.barUI.markTxt.text = (new Number(this.barUI.markTxt.text).valueOf() + 10) + ""
-					let addMark=new egret.TextField();
-					addMark.size=60;
-					addMark.text='+10';
-					addMark.textColor=0xffffff;
-					Helper.ObjectCenter(addMark);
-					super.addChild(addMark);
-					egret.Tween.get(addMark).to({y:addMark.y-100},1000).call(()=>{
-						super.removeChild(addMark);
-					});
-				} else {
-					this.barUI.markTxt.text = (new Number(this.barUI.markTxt.text).valueOf() - 10) + ""
-					let removeMark=new egret.TextField();
-					removeMark.size=60;
-					removeMark.text='-10';
-					removeMark.textColor=0xff0000;
-					Helper.ObjectCenter(removeMark);
-					super.addChild(removeMark);
-					egret.Tween.get(removeMark).to({y:removeMark.y-100},1000).call(()=>{
-						super.removeChild(removeMark);
-					});
+				let role: any = element
+				let nowDate = Date.now();
+				if (nowDate - this.timeSpan > 400) {
+					this.timeSpan=nowDate;
+					console.log(nowDate);
+					if (roleType == role.roleType) {
+						this.barUI.markTxt.text = (new Number(this.barUI.markTxt.text).valueOf() + 10) + ""
+						let addMark = new egret.TextField();
+						addMark.size = 60;
+						addMark.text = '+10';
+						addMark.textColor = 0xffffff;
+						Helper.ObjectCenter(addMark);
+						super.addChild(addMark);
+						egret.Tween.get(addMark).to({ y: addMark.y - 100 }, 1000).call(() => {
+							super.removeChild(addMark);
+						});
+					} else {
+						if (this.barUI.markTxt.text != "0") {
+							this.barUI.markTxt.text = (new Number(this.barUI.markTxt.text).valueOf() - 10) + ""
+							let removeMark = new egret.TextField();
+							removeMark.size = 60;
+							removeMark.text = '-10';
+							removeMark.textColor = 0xff0000;
+							Helper.ObjectCenter(removeMark);
+							super.addChild(removeMark);
+							egret.Tween.get(removeMark).to({ y: removeMark.y - 100 }, 1000).call(() => {
+								super.removeChild(removeMark);
+							});
+						}
+					}
 				}
 				return;
 			}

@@ -99,6 +99,7 @@ var Main = (function (_super) {
         var gameUI = GameUI.addGameUI(this, function () {
             _this.addBeginUI();
             _this.isfirst = false;
+            _this.musicPlayUI.musicControl.stop();
         });
         gameUI.addChild(this.musicPlayUI);
     };

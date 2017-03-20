@@ -8,7 +8,6 @@ class BtnGetUI extends egret.Sprite {
 		super.addChild(btnGet);
 		btnGet.touchEnabled = true;
 		btnGet.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-
 			let btnGetTip = Helper.getBitmap(R.hand_png);
 			btnGetTip.y -= 100;
 			super.addChild(btnGetTip);

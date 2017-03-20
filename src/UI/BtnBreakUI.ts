@@ -8,7 +8,6 @@ class BtnBreakUI extends egret.Sprite {
 		super.addChild(btnBreak);
 		btnBreak.touchEnabled = true;
 		btnBreak.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-
 			let btnBreakTip = Helper.getBitmap(R.chuizi_png);
 			btnBreakTip.y -= 100;
 			super.addChild(btnBreakTip);

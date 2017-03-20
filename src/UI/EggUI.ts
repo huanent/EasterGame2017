@@ -1,5 +1,6 @@
 class EggUI extends egret.Sprite {
-	roleType: RoleType = RoleType.egg
+	roleType: RoleType = RoleType.egg;
+	effective:true;
 	/**
 	 *兔子对象
 	 */

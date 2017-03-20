@@ -1,5 +1,6 @@
 class RabbitUI extends egret.Sprite {
-	roleType: RoleType = RoleType.rabbit
+	roleType: RoleType = RoleType.rabbit;
+	effective:true;
 	/**
 	 *兔子对象
 	 */

@@ -103,6 +103,7 @@ class Main extends egret.DisplayObjectContainer {
         let gameUI = GameUI.addGameUI(this, () => {
             this.addBeginUI();
             this.isfirst = false;
+            this.musicPlayUI.musicControl.stop();
         });
         gameUI.addChild(this.musicPlayUI);
     }
