@@ -18,13 +18,21 @@ var ReGameUI = (function (_super) {
         bg.graphics.drawRect(-1, -1, Helper.width + 1, Helper.height + 1);
         bg.graphics.endFill();
         bg.touchEnabled = true;
+        var level = 3;
+        if (450 < level && level <= 550)
+            level = 3;
+        if (550 < level && level <= 650)
+            level = 2;
+        if (650 < level)
+            level = 1;
         _super.prototype.addChild.call(_this, bg);
-        var window = Helper.getBitmap(R.jieguo_bg_png);
+        var window = Helper.getBitmap("jieguo_bg_" + level + "_png");
         Helper.ObjectCenter(window);
         _super.prototype.addChild.call(_this, window);
         var restart = Helper.getBitmap(R.restart_btn_png);
         Helper.ObjectCenter(restart);
-        restart.y += 60;
+        restart.x -= 130;
+        restart.y += 210;
         restart.touchEnabled = true;
         restart.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.dispatchEvent(new TapEvent(TapEvent.NAME));
@@ -32,21 +40,30 @@ var ReGameUI = (function (_super) {
         _super.prototype.addChild.call(_this, restart);
         var jl = Helper.getBitmap(R.jiangli_btn_png);
         Helper.ObjectCenter(jl);
-        jl.y += 180;
+        jl.x += 130;
+        jl.y += 210;
         _super.prototype.addChild.call(_this, jl);
-        var tipTxt = new egret.TextField();
-        tipTxt.textColor = 0xffae00;
-        tipTxt.size = 50;
-        tipTxt.text = "恭喜您获得三等奖";
-        Helper.ObjectCenter(tipTxt);
-        tipTxt.y -= 50;
-        _super.prototype.addChild.call(_this, tipTxt);
+        var tip2Txt = new egret.TextField();
+        tip2Txt.textColor = 0xffae00;
+        tip2Txt.size = 30;
+        if (level == 1) {
+            tip2Txt.text = "新西兰上品羊羔肉电子券一份";
+        }
+        else if (level == 2) {
+            tip2Txt.text = "乌梅汁电子券一份";
+        }
+        else if (level == 3) {
+            tip2Txt.text = "鹌鹑蛋电子券一份(不于其他优惠共享)";
+        }
+        Helper.ObjectCenter(tip2Txt);
+        tip2Txt.y += 55;
+        _super.prototype.addChild.call(_this, tip2Txt);
         var markTxt = new egret.TextField();
         markTxt.textColor = 0xffffff;
         markTxt.size = 40;
         markTxt.text = "得分 " + mark;
         Helper.ObjectCenter(markTxt);
-        markTxt.y -= 150;
+        markTxt.y -= 30;
         _super.prototype.addChild.call(_this, markTxt);
         return _this;
     }

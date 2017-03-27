@@ -15,11 +15,23 @@ var GameUI = (function (_super) {
         var _this = _super.call(this) || this;
         _this.rabbitEggList = new Array();
         _this.timeSpan = 0;
+        _this.eggMusicCan = false;
+        _this.rabitMusicCan = false;
         _this.initView();
         return _this;
     }
     GameUI.prototype.initView = function () {
         var _this = this;
+        this.eggMusic = new egret.Sound();
+        this.eggMusic.load('resource/assets/egg.mp3');
+        this.eggMusic.addEventListener(egret.Event.COMPLETE, function () {
+            _this.eggMusicCan = true;
+        }, this);
+        this.rabitMusic = new egret.Sound();
+        this.rabitMusic.load('resource/assets/rabit.wav');
+        this.rabitMusic.addEventListener(egret.Event.COMPLETE, function () {
+            _this.rabitMusicCan = true;
+        }, this);
         this.addBg();
         this.addBtn();
         this.addBar();
@@ -45,8 +57,8 @@ var GameUI = (function (_super) {
         var _this = this;
         var btnGet = new BtnGetUI();
         Helper.ObjectCenterX(btnGet);
-        btnGet.x -= 253;
-        btnGet.y = Helper.height - 184;
+        btnGet.x -= 230;
+        btnGet.y = Helper.height - 230;
         btnGet.touchEnabled = true;
         btnGet.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.btnTap(RoleType.rabbit);
@@ -54,8 +66,8 @@ var GameUI = (function (_super) {
         _super.prototype.addChild.call(this, btnGet);
         var btnBreack = new BtnBreakUI();
         Helper.ObjectCenterX(btnBreack);
-        btnBreack.x += 253;
-        btnBreack.y = Helper.height - 184;
+        btnBreack.x += 230;
+        btnBreack.y = Helper.height - 230;
         btnBreack.touchEnabled = true;
         btnBreack.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.btnTap(RoleType.egg);
@@ -65,7 +77,7 @@ var GameUI = (function (_super) {
     GameUI.prototype.addBar = function () {
         this.barUI = new BarUI();
         this.barUI.markTxt.text = "0";
-        this.barUI.timeTxt.text = "25";
+        this.barUI.timeTxt.text = "1";
         _super.prototype.addChild.call(this, this.barUI);
     };
     GameUI.prototype.addRole = function () {
@@ -81,15 +93,14 @@ var GameUI = (function (_super) {
         }
         Helper.ObjectCenterX(role);
         var finishX = role.x;
-        role.y = 600;
+        role.y = 510;
         role.scaleX = 0.3;
         role.scaleY = 0.3;
         role.x = (Helper.width - role.width * 0.3) * 0.5;
         _super.prototype.addChildAt.call(this, role, 1);
         this.rabbitEggList.push(role);
         egret.Tween.get(role)
-            .to({ y: Helper.height - 300, scaleX: 1, scaleY: 1, x: finishX }, 1500, egret.Ease.circIn)
-            .to({ y: Helper.height }, 500, egret.Ease.circInOut)
+            .to({ y: Helper.height, scaleX: 1, scaleY: 1, x: finishX }, 2500, egret.Ease.circIn)
             .call(function () {
             _this.rabbitEggList.shift();
             _super.prototype.removeChild.call(_this, role);
@@ -114,14 +125,24 @@ var GameUI = (function (_super) {
     GameUI.prototype.btnTap = function (roleType) {
         var _this = this;
         this.rabbitEggList.forEach(function (element) {
-            if (element.hitTestPoint(Helper.width / 2, Helper.height - 165)) {
+            if (element.hitTestPoint(Helper.width / 2, Helper.height - 160)) {
                 var role = element;
                 var nowDate = Date.now();
                 if (nowDate - _this.timeSpan > 400) {
                     _this.timeSpan = nowDate;
-                    console.log(nowDate);
                     if (roleType == role.roleType) {
                         _this.barUI.markTxt.text = (new Number(_this.barUI.markTxt.text).valueOf() + 10) + "";
+                        role.break();
+                        if (role.roleType == RoleType.egg) {
+                            if (_this.eggMusicCan) {
+                                _this.eggMusic.play(0, 1);
+                            }
+                        }
+                        else {
+                            if (_this.rabitMusicCan) {
+                                _this.rabitMusic.play(0, 1);
+                            }
+                        }
                         var addMark_1 = new egret.TextField();
                         addMark_1.size = 60;
                         addMark_1.text = '+10';

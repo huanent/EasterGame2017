@@ -1,6 +1,8 @@
 class EggUI extends egret.Sprite {
 	roleType: RoleType = RoleType.egg;
-	effective:true;
+	effective: true;
+	egg: egret.Bitmap;
+	eggBreak: egret.Bitmap;
 	/**
 	 *兔子对象
 	 */
@@ -9,7 +11,15 @@ class EggUI extends egret.Sprite {
 		this.initView()
 	}
 	private initView() {
-		let rabbit = Helper.getBitmap(R.egg_png);
-		super.addChild(rabbit);
+		this.egg = Helper.getBitmap(R.egg_png);
+		super.addChild(this.egg);
+		this.eggBreak = Helper.getBitmap(R.eggbreak_png);
+		this.eggBreak.visible = false;
+		super.addChild(this.eggBreak);
+	}
+
+	break = () => {
+		this.egg.visible = false;
+		this.eggBreak.visible = true;
 	}
 }

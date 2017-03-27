@@ -41,7 +41,7 @@ class BeginUI extends egret.Sprite {
     beginAnimation(): void {
         egret.Tween
             .get(this.title)
-            .to({ y: this.title.y + 650 }, 1000, egret.Ease.sineOut)
+            .to({ y: this.title.y + 350 }, 1000, egret.Ease.sineOut)
         egret.Tween
             .get(this.btn)
             .to({ y: this.btn.y - 500 }, 1000, egret.Ease.sineOut)

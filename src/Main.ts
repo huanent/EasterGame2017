@@ -91,11 +91,14 @@ class Main extends egret.DisplayObjectContainer {
         let beginUI = BeginUI.addBeginUI(this, () => {
             this.addGameUI();
         })
-        if (this.isfirst) {
-            beginUI.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-                this.musicPlayUI.musicControl = this.musicPlayUI.music.play();
-            }, this);
-        }
+        // if (this.isfirst) {
+        //     beginUI.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+        //         this.musicPlayUI.musicControl = this.musicPlayUI.music.play();
+        //     }, this);
+        // }
+        beginUI.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+            this.musicPlayUI.musicControl = this.musicPlayUI.music.play();
+        }, this);
 
     }
     private addGameUI(): void {

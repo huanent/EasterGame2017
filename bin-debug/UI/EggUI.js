@@ -14,12 +14,19 @@ var EggUI = (function (_super) {
     function EggUI() {
         var _this = _super.call(this) || this;
         _this.roleType = RoleType.egg;
+        _this.break = function () {
+            _this.egg.visible = false;
+            _this.eggBreak.visible = true;
+        };
         _this.initView();
         return _this;
     }
     EggUI.prototype.initView = function () {
-        var rabbit = Helper.getBitmap(R.egg_png);
-        _super.prototype.addChild.call(this, rabbit);
+        this.egg = Helper.getBitmap(R.egg_png);
+        _super.prototype.addChild.call(this, this.egg);
+        this.eggBreak = Helper.getBitmap(R.eggbreak_png);
+        this.eggBreak.visible = false;
+        _super.prototype.addChild.call(this, this.eggBreak);
     };
     return EggUI;
 }(egret.Sprite));

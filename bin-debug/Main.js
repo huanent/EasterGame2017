@@ -87,11 +87,14 @@ var Main = (function (_super) {
         var beginUI = BeginUI.addBeginUI(this, function () {
             _this.addGameUI();
         });
-        if (this.isfirst) {
-            beginUI.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-                _this.musicPlayUI.musicControl = _this.musicPlayUI.music.play();
-            }, this);
-        }
+        // if (this.isfirst) {
+        //     beginUI.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+        //         this.musicPlayUI.musicControl = this.musicPlayUI.music.play();
+        //     }, this);
+        // }
+        beginUI.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            _this.musicPlayUI.musicControl = _this.musicPlayUI.music.play();
+        }, this);
     };
     Main.prototype.addGameUI = function () {
         var _this = this;

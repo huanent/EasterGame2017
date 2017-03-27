@@ -1,7 +1,11 @@
 class GameUI extends egret.Sprite {
 	rabbitEggList: Array<egret.Sprite> = new Array<egret.Sprite>();
 	barUI: BarUI;
-	timeSpan: number=0;
+	timeSpan: number = 0;
+	eggMusic: egret.Sound;
+	eggMusicCan: boolean = false;
+	rabitMusic: egret.Sound;
+	rabitMusicCan: boolean = false;
 	/**
 	 *主游戏场景
 	 */
@@ -10,6 +14,16 @@ class GameUI extends egret.Sprite {
 		this.initView();
 	}
 	private initView(): void {
+		this.eggMusic = new egret.Sound();
+		this.eggMusic.load('resource/assets/egg.mp3');
+		this.eggMusic.addEventListener(egret.Event.COMPLETE, () => {
+			this.eggMusicCan = true;
+		}, this);
+		this.rabitMusic = new egret.Sound();
+		this.rabitMusic.load('resource/assets/rabit.wav');
+		this.rabitMusic.addEventListener(egret.Event.COMPLETE, () => {
+			this.rabitMusicCan = true;
+		}, this);
 		this.addBg();
 		this.addBtn();
 		this.addBar();
@@ -34,8 +48,8 @@ class GameUI extends egret.Sprite {
 	private addBtn(): void {
 		let btnGet = new BtnGetUI();
 		Helper.ObjectCenterX(btnGet);
-		btnGet.x -= 253;
-		btnGet.y = Helper.height - 184;
+		btnGet.x -= 230;
+		btnGet.y = Helper.height - 230;
 		btnGet.touchEnabled = true;
 		btnGet.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.btnTap(RoleType.rabbit);
@@ -43,8 +57,8 @@ class GameUI extends egret.Sprite {
 		super.addChild(btnGet);
 		let btnBreack = new BtnBreakUI();
 		Helper.ObjectCenterX(btnBreack);
-		btnBreack.x += 253;
-		btnBreack.y = Helper.height - 184;
+		btnBreack.x += 230;
+		btnBreack.y = Helper.height - 230;
 		btnBreack.touchEnabled = true;
 		btnBreack.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.btnTap(RoleType.egg);
@@ -54,7 +68,7 @@ class GameUI extends egret.Sprite {
 	private addBar(): void {
 		this.barUI = new BarUI();
 		this.barUI.markTxt.text = "0";
-		this.barUI.timeTxt.text = "25";
+		this.barUI.timeTxt.text = "40";
 		super.addChild(this.barUI);
 	}
 
@@ -70,15 +84,14 @@ class GameUI extends egret.Sprite {
 		}
 		Helper.ObjectCenterX(role);
 		let finishX: number = role.x;
-		role.y = 600;
+		role.y = 510;
 		role.scaleX = 0.3;
 		role.scaleY = 0.3;
 		role.x = (Helper.width - role.width * 0.3) * 0.5;
 		super.addChildAt(role, 1);
 		this.rabbitEggList.push(role);
 		egret.Tween.get(role)
-			.to({ y: Helper.height - 300, scaleX: 1, scaleY: 1, x: finishX }, 1500, egret.Ease.circIn)
-			.to({ y: Helper.height }, 500, egret.Ease.circInOut)
+			.to({ y: Helper.height, scaleX: 1, scaleY: 1, x: finishX }, 2500, egret.Ease.circIn)
 			.call(() => {
 				this.rabbitEggList.shift();
 				super.removeChild(role);
@@ -103,14 +116,23 @@ class GameUI extends egret.Sprite {
 	}
 	private btnTap(roleType: RoleType): void {
 		this.rabbitEggList.forEach(element => {
-			if (element.hitTestPoint(Helper.width / 2, Helper.height - 165)) {
+			if (element.hitTestPoint(Helper.width / 2, Helper.height - 160)) {
 				let role: any = element
 				let nowDate = Date.now();
 				if (nowDate - this.timeSpan > 400) {
-					this.timeSpan=nowDate;
-					console.log(nowDate);
+					this.timeSpan = nowDate;
 					if (roleType == role.roleType) {
-						this.barUI.markTxt.text = (new Number(this.barUI.markTxt.text).valueOf() + 10) + ""
+						this.barUI.markTxt.text = (new Number(this.barUI.markTxt.text).valueOf() + 10) + "";
+						role.break();
+						if (role.roleType == RoleType.egg) {
+							if (this.eggMusicCan) {
+								this.eggMusic.play(0, 1);
+							}
+						} else {
+							if (this.rabitMusicCan) {
+								this.rabitMusic.play(0, 1);
+							}
+						}
 						let addMark = new egret.TextField();
 						addMark.size = 60;
 						addMark.text = '+10';

@@ -1,15 +1,15 @@
 {
 	"groups": [
 		{
-			"keys": "egret_icon_png,description_json,begin_bg_jpg,begin_btn_png,begin_title_png,bg_png,icon_music_close_png,icon_music_open_png,pz_mp3",
+			"keys": "egret_icon_png,description_json,begin_btn_png,begin_title_png,bg_png,icon_music_close_png,icon_music_open_png,pz_mp3",
 			"name": "preload"
 		},
 		{
-			"keys": "game_bg_jpg,game_btn_break_png,game_btn_get_png,egg_png,rabbit_png,hand-_png,chuizi_png,great_bg_png",
+			"keys": "game_btn_break_png,game_btn_get_png,egg_png,rabbit_png,hand-_png,chuizi_png,great_bg_png,rabit_taked_png,egg-break_png,egg_mp3,rabit_wav",
 			"name": "gameui"
 		},
 		{
-			"keys": "jiangli_btn_png,jieguo_bg_png,restart_btn_png",
+			"keys": "jiangli_btn_png,restart_btn_png,jieguo_bg_1_png,jieguo_bg_3_png,jieguo_bg_2_png",
 			"name": "regameui"
 		},
 		{
@@ -27,16 +27,6 @@
 			"url": "config/description.json",
 			"type": "json",
 			"name": "description_json"
-		},
-		{
-			"url": "assets/begin_bg.jpg",
-			"type": "image",
-			"name": "begin_bg_jpg"
-		},
-		{
-			"url": "assets/game_bg.jpg",
-			"type": "image",
-			"name": "game_bg_jpg"
 		},
 		{
 			"url": "assets/begin_btn.png",
@@ -134,19 +124,54 @@
 			"name": "pic6_png"
 		},
 		{
-			"name": "icon_music_close_png",
+			"url": "assets/icon_music_close.png",
 			"type": "image",
-			"url": "assets/icon_music_close.png"
+			"name": "icon_music_close_png"
 		},
 		{
-			"name": "icon_music_open_png",
+			"url": "assets/icon_music_open.png",
 			"type": "image",
-			"url": "assets/icon_music_open.png"
+			"name": "icon_music_open_png"
 		},
 		{
-			"name": "pz_mp3",
+			"url": "assets/pz.mp3",
 			"type": "sound",
-			"url": "assets/pz.mp3"
+			"name": "pz_mp3"
+		},
+		{
+			"url": "assets/egg-break.png",
+			"type": "image",
+			"name": "egg-break_png"
+		},
+		{
+			"url": "assets/rabit_taked.png",
+			"type": "image",
+			"name": "rabit_taked_png"
+		},
+		{
+			"url": "assets/egg.mp3",
+			"type": "sound",
+			"name": "egg_mp3"
+		},
+		{
+			"url": "assets/rabit.wav",
+			"type": "sound",
+			"name": "rabit_wav"
+		},
+		{
+			"url": "assets/jieguo_bg_1.png",
+			"type": "image",
+			"name": "jieguo_bg_1_png"
+		},
+		{
+			"url": "assets/jieguo_bg_2.png",
+			"type": "image",
+			"name": "jieguo_bg_3_png"
+		},
+		{
+			"url": "assets/jieguo_bg_3.png",
+			"type": "image",
+			"name": "jieguo_bg_2_png"
 		}
 	]
 }

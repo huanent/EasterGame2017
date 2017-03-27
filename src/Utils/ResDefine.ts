@@ -7,6 +7,8 @@ class R {
     static game_btn_get_png: string = 'game_btn_get_png';
     static egg_png: string = 'egg_png';
     static rabbit_png: string = 'rabbit_png';
+    static eggbreak_png: string = 'egg-break_png';
+    static rabit_taked_png: string = 'rabit_taked_png';
     static great_bg_png: string = 'great_bg_png';
     static hand_png: string = 'hand-_png';
     static chuizi_png: string = 'chuizi_png';
