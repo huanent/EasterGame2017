@@ -9,11 +9,22 @@ class ReGameUI extends egret.Sprite {
 		bg.graphics.drawRect(-1, -1, Helper.width + 1, Helper.height + 1);
 		bg.graphics.endFill();
 		bg.touchEnabled = true;
-		let level: number = 3;
-		if (450 < level && level <= 550) level = 3;
-		if (550 < level && level <= 650) level = 2;
-		if (650 < level) level = 1;
+		let markNum=new Number(mark);
+		let level: number = 0;
 		super.addChild(bg);
+		if (450 < markNum && markNum <= 550) {
+			level = 3;
+		}
+		else if (550 < markNum && markNum <= 650) {
+			level = 2;
+		}
+		else if (650 < markNum) {
+			level = 1;
+		}
+		if (level == 0) {
+			this.addNoGiveWindow();
+			return;
+		}
 		let window = Helper.getBitmap("jieguo_bg_" + level + "_png")
 		Helper.ObjectCenter(window)
 		super.addChild(window);
@@ -51,6 +62,21 @@ class ReGameUI extends egret.Sprite {
 		Helper.ObjectCenter(markTxt);
 		markTxt.y -= 30;
 		super.addChild(markTxt);
+
+	}
+	addNoGiveWindow(): void {
+		let window = Helper.getBitmap("default@2x_png")
+		Helper.ObjectCenter(window)
+		window.y-=100;
+		super.addChild(window);
+		let restart = Helper.getBitmap(R.restart_btn_png)
+		Helper.ObjectCenter(restart);
+		restart.y += 210;
+		restart.touchEnabled = true;
+		restart.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+			this.dispatchEvent(new TapEvent(TapEvent.NAME));
+		}, this)
+		super.addChild(restart);
 
 	}
 }

@@ -77,7 +77,7 @@ var GameUI = (function (_super) {
     GameUI.prototype.addBar = function () {
         this.barUI = new BarUI();
         this.barUI.markTxt.text = "0";
-        this.barUI.timeTxt.text = "1";
+        this.barUI.timeTxt.text = "40";
         _super.prototype.addChild.call(this, this.barUI);
     };
     GameUI.prototype.addRole = function () {

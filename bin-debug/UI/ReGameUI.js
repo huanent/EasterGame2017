@@ -18,14 +18,22 @@ var ReGameUI = (function (_super) {
         bg.graphics.drawRect(-1, -1, Helper.width + 1, Helper.height + 1);
         bg.graphics.endFill();
         bg.touchEnabled = true;
-        var level = 3;
-        if (450 < level && level <= 550)
-            level = 3;
-        if (550 < level && level <= 650)
-            level = 2;
-        if (650 < level)
-            level = 1;
+        var markNum = new Number(mark);
+        var level = 0;
         _super.prototype.addChild.call(_this, bg);
+        if (450 < markNum && markNum <= 550) {
+            level = 3;
+        }
+        else if (550 < markNum && markNum <= 650) {
+            level = 2;
+        }
+        else if (650 < markNum) {
+            level = 1;
+        }
+        if (level == 0) {
+            _this.addNoGiveWindow();
+            return _this;
+        }
         var window = Helper.getBitmap("jieguo_bg_" + level + "_png");
         Helper.ObjectCenter(window);
         _super.prototype.addChild.call(_this, window);
@@ -67,6 +75,21 @@ var ReGameUI = (function (_super) {
         _super.prototype.addChild.call(_this, markTxt);
         return _this;
     }
+    ReGameUI.prototype.addNoGiveWindow = function () {
+        var _this = this;
+        var window = Helper.getBitmap("default@2x_png");
+        Helper.ObjectCenter(window);
+        window.y -= 100;
+        _super.prototype.addChild.call(this, window);
+        var restart = Helper.getBitmap(R.restart_btn_png);
+        Helper.ObjectCenter(restart);
+        restart.y += 210;
+        restart.touchEnabled = true;
+        restart.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            _this.dispatchEvent(new TapEvent(TapEvent.NAME));
+        }, this);
+        _super.prototype.addChild.call(this, restart);
+    };
     return ReGameUI;
 }(egret.Sprite));
 __reflect(ReGameUI.prototype, "ReGameUI");

@@ -23,11 +23,11 @@ var BarUI = (function (_super) {
         _super.prototype.addChild.call(this, bar);
         this.markTxt = new egret.TextField();
         this.markTxt.y += 45;
-        this.markTxt.x = 250;
+        this.markTxt.x = 280;
         _super.prototype.addChild.call(this, this.markTxt);
         this.timeTxt = new egret.TextField();
         this.timeTxt.y += 45;
-        this.timeTxt.x = 520;
+        this.timeTxt.x = 490;
         _super.prototype.addChild.call(this, this.timeTxt);
     };
     return BarUI;

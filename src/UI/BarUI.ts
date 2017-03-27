@@ -15,11 +15,11 @@ class BarUI extends egret.Sprite {
 		super.addChild(bar);
 		this.markTxt = new egret.TextField();
 		this.markTxt.y += 45;
-		this.markTxt.x = 250;
+		this.markTxt.x = 280;
 		super.addChild(this.markTxt);
 		this.timeTxt = new egret.TextField();
 		this.timeTxt.y += 45;
-		this.timeTxt.x = 520;
+		this.timeTxt.x = 490;
 		super.addChild(this.timeTxt);
 	}
 }

@@ -30,13 +30,34 @@ var BeginUI = (function (_super) {
         var _this = this;
         this.btn = Helper.getBitmap(R.begin_btn_png);
         Helper.ObjectCenterX(this.btn);
-        this.btn.y = Helper.height - 200;
+        this.btn.y = Helper.height - 350;
         this.btn.y += 500;
         _super.prototype.addChild.call(this, this.btn);
         this.btn.touchEnabled = true;
         this.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.dispatchEvent(_this.tabEvent);
         }, this);
+        this.btnRule = Helper.getBitmap("rules_btn-@2x_png");
+        Helper.ObjectCenterX(this.btnRule);
+        this.btnRule.y = Helper.height - 200;
+        this.btnRule.y += 500;
+        this.btnRule.touchEnabled = true;
+        this.btnRule.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            var bg = new egret.Shape();
+            bg.graphics.beginFill(0, 0.8);
+            bg.graphics.drawRect(-1, -1, Helper.width + 1, Helper.height + 1);
+            bg.graphics.endFill();
+            bg.touchEnabled = true;
+            var rule = Helper.getBitmap("rules_bg@2x_png");
+            Helper.ObjectCenter(rule);
+            _super.prototype.addChild.call(_this, bg);
+            _super.prototype.addChild.call(_this, rule);
+            bg.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+                _super.prototype.removeChild.call(_this, bg);
+                _super.prototype.removeChild.call(_this, rule);
+            }, _this);
+        }, this);
+        _super.prototype.addChild.call(this, this.btnRule);
     };
     BeginUI.prototype.addTitle = function () {
         this.title = Helper.getBitmap(R.begin_title_png);
@@ -51,6 +72,9 @@ var BeginUI = (function (_super) {
         egret.Tween
             .get(this.btn)
             .to({ y: this.btn.y - 500 }, 1000, egret.Ease.sineOut);
+        egret.Tween
+            .get(this.btnRule)
+            .to({ y: this.btnRule.y - 500 }, 1000, egret.Ease.sineOut);
     };
     BeginUI.prototype.finishAnimation = function (call) {
         egret.Tween
@@ -60,6 +84,9 @@ var BeginUI = (function (_super) {
             .get(this.btn)
             .to({ y: this.btn.y + 500 }, 1000, egret.Ease.sineIn)
             .call(call);
+        egret.Tween
+            .get(this.btnRule)
+            .to({ y: this.btnRule.y + 500 }, 1000, egret.Ease.sineIn);
     };
     BeginUI.addBeginUI = function (parent, call) {
         var beginUI = new BeginUI();

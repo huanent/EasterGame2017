@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "egret_icon_png,description_json,begin_btn_png,begin_title_png,bg_png,icon_music_close_png,icon_music_open_png,pz_mp3",
+			"keys": "egret_icon_png,description_json,begin_btn_png,begin_title_png,bg_png,icon_music_close_png,icon_music_open_png,pz_mp3,rules_btn-@2x_png,rules_bg@2x_png",
 			"name": "preload"
 		},
 		{
@@ -9,7 +9,7 @@
 			"name": "gameui"
 		},
 		{
-			"keys": "jiangli_btn_png,restart_btn_png,jieguo_bg_1_png,jieguo_bg_3_png,jieguo_bg_2_png",
+			"keys": "jiangli_btn_png,restart_btn_png,jieguo_bg_1_png,jieguo_bg_3_png,jieguo_bg_2_png,default@2x_png",
 			"name": "regameui"
 		},
 		{
@@ -82,11 +82,6 @@
 			"url": "assets/jiangli_btn.png",
 			"type": "image",
 			"name": "jiangli_btn_png"
-		},
-		{
-			"url": "assets/jieguo_bg.png",
-			"type": "image",
-			"name": "jieguo_bg_png"
 		},
 		{
 			"url": "assets/restart_btn.png",
@@ -172,6 +167,21 @@
 			"url": "assets/jieguo_bg_3.png",
 			"type": "image",
 			"name": "jieguo_bg_2_png"
+		},
+		{
+			"url": "assets/default@2x.png",
+			"type": "image",
+			"name": "default@2x_png"
+		},
+		{
+			"url": "assets/rules_btn-@2x.png",
+			"type": "image",
+			"name": "rules_btn-@2x_png"
+		},
+		{
+			"name": "rules_bg@2x_png",
+			"type": "image",
+			"url": "assets/rules_bg@2x.png"
 		}
 	]
 }
