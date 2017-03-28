@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "egret_icon_png,description_json,begin_btn_png,begin_title_png,bg_png,icon_music_close_png,icon_music_open_png,pz_mp3,rules_btn-@2x_png,rules_bg@2x_png",
+			"keys": "egret_icon_png,description_json,begin_btn_png,begin_title_png,bg_png,icon_music_close_png,icon_music_open_png,pz_mp3,rules_btn-@2x_png,rules_bg@2x_png,btn_close@2x_png",
 			"name": "preload"
 		},
 		{
@@ -182,6 +182,11 @@
 			"name": "rules_bg@2x_png",
 			"type": "image",
 			"url": "assets/rules_bg@2x.png"
+		},
+		{
+			"name": "btn_close@2x_png",
+			"type": "image",
+			"url": "assets/btn_close@2x.png"
 		}
 	]
 }

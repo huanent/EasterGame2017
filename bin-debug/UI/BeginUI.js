@@ -52,9 +52,15 @@ var BeginUI = (function (_super) {
             Helper.ObjectCenter(rule);
             _super.prototype.addChild.call(_this, bg);
             _super.prototype.addChild.call(_this, rule);
-            bg.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            var closeBtn = Helper.getBitmap("btn_close@2x_png");
+            closeBtn.touchEnabled = true;
+            closeBtn.y = 230;
+            closeBtn.x = 590;
+            _super.prototype.addChild.call(_this, closeBtn);
+            closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
                 _super.prototype.removeChild.call(_this, bg);
                 _super.prototype.removeChild.call(_this, rule);
+                _super.prototype.removeChild.call(_this, closeBtn);
             }, _this);
         }, this);
         _super.prototype.addChild.call(this, this.btnRule);
