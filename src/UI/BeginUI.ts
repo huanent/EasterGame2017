@@ -47,7 +47,7 @@ class BeginUI extends egret.Sprite {
             super.addChild(rule);
             let closeBtn = Helper.getBitmap("btn_close@2x_png");
             closeBtn.touchEnabled=true;
-            closeBtn.y=230;
+            closeBtn.y=130;
             closeBtn.x=590;
             super.addChild(closeBtn);
             closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {

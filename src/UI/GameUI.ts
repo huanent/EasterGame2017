@@ -83,7 +83,7 @@ class GameUI extends egret.Sprite {
 				role = new EggUI();
 		}
 		Helper.ObjectCenterX(role);
-		let finishX: number = role.x;
+		let finishX: number = role.x*1.07;
 		role.y = 510;
 		role.scaleX = 0.3;
 		role.scaleY = 0.3;
@@ -91,7 +91,8 @@ class GameUI extends egret.Sprite {
 		super.addChildAt(role, 1);
 		this.rabbitEggList.push(role);
 		egret.Tween.get(role)
-			.to({ y: Helper.height, scaleX: 1, scaleY: 1, x: finishX }, 2500, egret.Ease.circIn)
+			.to({ y: Helper.height - 400, scaleX: 0.8, scaleY: 0.8, x: finishX }, 2000, egret.Ease.circIn)
+			.to({ y: Helper.height }, 500, egret.Ease.circIn)
 			.call(() => {
 				this.rabbitEggList.shift();
 				super.removeChild(role);
@@ -116,7 +117,7 @@ class GameUI extends egret.Sprite {
 	}
 	private btnTap(roleType: RoleType): void {
 		this.rabbitEggList.forEach(element => {
-			if (element.hitTestPoint(Helper.width / 2, Helper.height - 160)) {
+			if (element.hitTestPoint(Helper.width / 2, Helper.height - 180)) {
 				let role: any = element
 				let nowDate = Date.now();
 				if (nowDate - this.timeSpan > 400) {

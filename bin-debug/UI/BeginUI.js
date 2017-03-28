@@ -54,7 +54,7 @@ var BeginUI = (function (_super) {
             _super.prototype.addChild.call(_this, rule);
             var closeBtn = Helper.getBitmap("btn_close@2x_png");
             closeBtn.touchEnabled = true;
-            closeBtn.y = 230;
+            closeBtn.y = 130;
             closeBtn.x = 590;
             _super.prototype.addChild.call(_this, closeBtn);
             closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {

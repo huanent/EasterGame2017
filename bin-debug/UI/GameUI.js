@@ -92,7 +92,7 @@ var GameUI = (function (_super) {
                 role = new EggUI();
         }
         Helper.ObjectCenterX(role);
-        var finishX = role.x;
+        var finishX = role.x * 1.07;
         role.y = 510;
         role.scaleX = 0.3;
         role.scaleY = 0.3;
@@ -100,7 +100,8 @@ var GameUI = (function (_super) {
         _super.prototype.addChildAt.call(this, role, 1);
         this.rabbitEggList.push(role);
         egret.Tween.get(role)
-            .to({ y: Helper.height, scaleX: 1, scaleY: 1, x: finishX }, 2500, egret.Ease.circIn)
+            .to({ y: Helper.height - 400, scaleX: 0.8, scaleY: 0.8, x: finishX }, 2000, egret.Ease.circIn)
+            .to({ y: Helper.height }, 500, egret.Ease.circIn)
             .call(function () {
             _this.rabbitEggList.shift();
             _super.prototype.removeChild.call(_this, role);
@@ -125,7 +126,7 @@ var GameUI = (function (_super) {
     GameUI.prototype.btnTap = function (roleType) {
         var _this = this;
         this.rabbitEggList.forEach(function (element) {
-            if (element.hitTestPoint(Helper.width / 2, Helper.height - 160)) {
+            if (element.hitTestPoint(Helper.width / 2, Helper.height - 180)) {
                 var role = element;
                 var nowDate = Date.now();
                 if (nowDate - _this.timeSpan > 400) {

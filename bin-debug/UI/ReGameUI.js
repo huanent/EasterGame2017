@@ -51,21 +51,19 @@ var ReGameUI = (function (_super) {
         jl.x += 130;
         jl.y += 210;
         _super.prototype.addChild.call(_this, jl);
-        var tip2Txt = new egret.TextField();
-        tip2Txt.textColor = 0xffae00;
-        tip2Txt.size = 30;
-        if (level == 1) {
-            tip2Txt.text = "新西兰上品羊羔肉电子券一份";
-        }
-        else if (level == 2) {
-            tip2Txt.text = "乌梅汁电子券一份";
-        }
-        else if (level == 3) {
-            tip2Txt.text = "鹌鹑蛋电子券一份(不于其他优惠共享)";
-        }
-        Helper.ObjectCenter(tip2Txt);
-        tip2Txt.y += 55;
-        _super.prototype.addChild.call(_this, tip2Txt);
+        // let tip2Txt = new egret.TextField();
+        // tip2Txt.textColor = 0xffae00;
+        // tip2Txt.size = 30;
+        // if (level == 1) {
+        // 	tip2Txt.text = "新西兰上品羊羔肉电子券一份";
+        // } else if (level == 2) {
+        // 	tip2Txt.text = "乌梅汁电子券一份";
+        // } else if (level == 3) {
+        // 	tip2Txt.text = "鹌鹑蛋电子券一份(不于其他优惠共享)";
+        // }
+        // Helper.ObjectCenter(tip2Txt);
+        // tip2Txt.y += 55;
+        // super.addChild(tip2Txt);
         var markTxt = new egret.TextField();
         markTxt.textColor = 0xffffff;
         markTxt.size = 40;
