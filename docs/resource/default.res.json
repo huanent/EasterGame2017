@@ -1,0 +1,192 @@
+{
+	"groups": [
+		{
+			"keys": "egret_icon_png,description_json,begin_btn_png,begin_title_png,bg_png,icon_music_close_png,icon_music_open_png,pz_mp3,rules_btn-@2x_png,rules_bg@2x_png,btn_close@2x_png",
+			"name": "preload"
+		},
+		{
+			"keys": "game_btn_break_png,game_btn_get_png,egg_png,rabbit_png,hand-_png,chuizi_png,great_bg_png,rabit_taked_png,egg-break_png,egg_mp3,rabit_wav",
+			"name": "gameui"
+		},
+		{
+			"keys": "jiangli_btn_png,restart_btn_png,jieguo_bg_1_png,jieguo_bg_3_png,jieguo_bg_2_png,default@2x_png",
+			"name": "regameui"
+		},
+		{
+			"keys": "pic6_png,pic5_png,pic4_png,pic3_png,pic2_png,pic1_png",
+			"name": "load"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/egret_icon.png",
+			"type": "image",
+			"name": "egret_icon_png"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/begin_btn.png",
+			"type": "image",
+			"name": "begin_btn_png"
+		},
+		{
+			"url": "assets/begin_title.png",
+			"type": "image",
+			"name": "begin_title_png"
+		},
+		{
+			"url": "assets/game_btn_get.png",
+			"type": "image",
+			"name": "game_btn_get_png"
+		},
+		{
+			"url": "assets/game_btn_break.png",
+			"type": "image",
+			"name": "game_btn_break_png"
+		},
+		{
+			"url": "assets/egg.png",
+			"type": "image",
+			"name": "egg_png"
+		},
+		{
+			"url": "assets/rabbit.png",
+			"type": "image",
+			"name": "rabbit_png"
+		},
+		{
+			"url": "assets/bg.png",
+			"type": "image",
+			"name": "bg_png"
+		},
+		{
+			"url": "assets/hand-.png",
+			"type": "image",
+			"name": "hand-_png"
+		},
+		{
+			"url": "assets/chuizi.png",
+			"type": "image",
+			"name": "chuizi_png"
+		},
+		{
+			"url": "assets/great_bg.png",
+			"type": "image",
+			"name": "great_bg_png"
+		},
+		{
+			"url": "assets/jiangli_btn.png",
+			"type": "image",
+			"name": "jiangli_btn_png"
+		},
+		{
+			"url": "assets/restart_btn.png",
+			"type": "image",
+			"name": "restart_btn_png"
+		},
+		{
+			"url": "assets/pic1.png",
+			"type": "image",
+			"name": "pic1_png"
+		},
+		{
+			"url": "assets/pic2.png",
+			"type": "image",
+			"name": "pic2_png"
+		},
+		{
+			"url": "assets/pic3.png",
+			"type": "image",
+			"name": "pic3_png"
+		},
+		{
+			"url": "assets/pic4.png",
+			"type": "image",
+			"name": "pic4_png"
+		},
+		{
+			"url": "assets/pic5.png",
+			"type": "image",
+			"name": "pic5_png"
+		},
+		{
+			"url": "assets/pic6.png",
+			"type": "image",
+			"name": "pic6_png"
+		},
+		{
+			"url": "assets/icon_music_close.png",
+			"type": "image",
+			"name": "icon_music_close_png"
+		},
+		{
+			"url": "assets/icon_music_open.png",
+			"type": "image",
+			"name": "icon_music_open_png"
+		},
+		{
+			"url": "assets/pz.mp3",
+			"type": "sound",
+			"name": "pz_mp3"
+		},
+		{
+			"url": "assets/egg-break.png",
+			"type": "image",
+			"name": "egg-break_png"
+		},
+		{
+			"url": "assets/rabit_taked.png",
+			"type": "image",
+			"name": "rabit_taked_png"
+		},
+		{
+			"url": "assets/egg.mp3",
+			"type": "sound",
+			"name": "egg_mp3"
+		},
+		{
+			"url": "assets/rabit.wav",
+			"type": "sound",
+			"name": "rabit_wav"
+		},
+		{
+			"url": "assets/jieguo_bg_1.png",
+			"type": "image",
+			"name": "jieguo_bg_1_png"
+		},
+		{
+			"url": "assets/jieguo_bg_2.png",
+			"type": "image",
+			"name": "jieguo_bg_3_png"
+		},
+		{
+			"url": "assets/jieguo_bg_3.png",
+			"type": "image",
+			"name": "jieguo_bg_2_png"
+		},
+		{
+			"url": "assets/default@2x.png",
+			"type": "image",
+			"name": "default@2x_png"
+		},
+		{
+			"url": "assets/rules_btn-@2x.png",
+			"type": "image",
+			"name": "rules_btn-@2x_png"
+		},
+		{
+			"name": "rules_bg@2x_png",
+			"type": "image",
+			"url": "assets/rules_bg@2x.png"
+		},
+		{
+			"name": "btn_close@2x_png",
+			"type": "image",
+			"url": "assets/btn_close@2x.png"
+		}
+	]
+}
