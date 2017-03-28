@@ -80,6 +80,7 @@ var BeginUI = (function (_super) {
             .to({ y: this.btn.y - 500 }, 1000, egret.Ease.sineOut);
         egret.Tween
             .get(this.btnRule)
+            .wait(100)
             .to({ y: this.btnRule.y - 500 }, 1000, egret.Ease.sineOut);
     };
     BeginUI.prototype.finishAnimation = function (call) {
@@ -88,6 +89,7 @@ var BeginUI = (function (_super) {
             .to({ y: this.title.y - 650 }, 1000, egret.Ease.sineIn);
         egret.Tween
             .get(this.btn)
+            .wait(100)
             .to({ y: this.btn.y + 500 }, 1000, egret.Ease.sineIn)
             .call(call);
         egret.Tween

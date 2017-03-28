@@ -75,6 +75,7 @@ class BeginUI extends egret.Sprite {
             .to({ y: this.btn.y - 500 }, 1000, egret.Ease.sineOut);
         egret.Tween
             .get(this.btnRule)
+            .wait(100)
             .to({ y: this.btnRule.y - 500 }, 1000, egret.Ease.sineOut);
     }
     finishAnimation(call: Function): void {
@@ -83,6 +84,7 @@ class BeginUI extends egret.Sprite {
             .to({ y: this.title.y - 650 }, 1000, egret.Ease.sineIn)
         egret.Tween
             .get(this.btn)
+            .wait(100)
             .to({ y: this.btn.y + 500 }, 1000, egret.Ease.sineIn)
             .call(call);
         egret.Tween
