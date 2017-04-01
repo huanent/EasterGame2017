@@ -34,9 +34,9 @@ var ReGameUI = (function (_super) {
             _this.addNoGiveWindow();
             return _this;
         }
-        var window = Helper.getBitmap("jieguo_bg_" + level + "_png");
-        Helper.ObjectCenter(window);
-        _super.prototype.addChild.call(_this, window);
+        var windows = Helper.getBitmap("jieguo_bg_" + level + "_png");
+        Helper.ObjectCenter(windows);
+        _super.prototype.addChild.call(_this, windows);
         var restart = Helper.getBitmap(R.restart_btn_png);
         Helper.ObjectCenter(restart);
         restart.x -= 130;
@@ -50,20 +50,11 @@ var ReGameUI = (function (_super) {
         Helper.ObjectCenter(jl);
         jl.x += 130;
         jl.y += 210;
+        jl.touchEnabled = true;
+        jl.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            window.location.href = "http://192.168.1.223:11000/Coupon/MyCoupon?mch=guzhiwei";
+        }, _this);
         _super.prototype.addChild.call(_this, jl);
-        // let tip2Txt = new egret.TextField();
-        // tip2Txt.textColor = 0xffae00;
-        // tip2Txt.size = 30;
-        // if (level == 1) {
-        // 	tip2Txt.text = "新西兰上品羊羔肉电子券一份";
-        // } else if (level == 2) {
-        // 	tip2Txt.text = "乌梅汁电子券一份";
-        // } else if (level == 3) {
-        // 	tip2Txt.text = "鹌鹑蛋电子券一份(不于其他优惠共享)";
-        // }
-        // Helper.ObjectCenter(tip2Txt);
-        // tip2Txt.y += 55;
-        // super.addChild(tip2Txt);
         var markTxt = new egret.TextField();
         markTxt.textColor = 0xffffff;
         markTxt.size = 40;
@@ -71,8 +62,36 @@ var ReGameUI = (function (_super) {
         Helper.ObjectCenter(markTxt);
         markTxt.y -= 30;
         _super.prototype.addChild.call(_this, markTxt);
+        var params = "";
+        if (level > 0) {
+            var request = new egret.HttpRequest();
+            request.responseType = egret.HttpResponseType.TEXT;
+            request.open("http://192.168.1.223:11000/wxapi/Activity/EasterDay2017/Play?openid=" + StaticData.OpenId + "&prizeType=" + level, egret.HttpMethod.POST);
+            //设置响应头
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            //发送参数
+            request.send();
+            request.addEventListener(egret.Event.COMPLETE, _this.onGetComplete, _this);
+        }
         return _this;
     }
+    ReGameUI.prototype.onGetComplete = function (event) {
+        var request = event.currentTarget;
+        var v = JSON.parse(request.response).Data;
+        //alert(request.response);
+        if (!v) {
+            var isGet = new egret.TextField();
+            isGet.text = "已领取过奖励";
+            isGet.textColor = 0xddaf5c;
+            Helper.ObjectCenter(isGet);
+            isGet.y += 130;
+            _super.prototype.addChild.call(this, isGet);
+        }
+    };
+    ReGameUI.prototype.onGetIOError = function (event) {
+        // 		alert(event.data)
+        //         egret.log("get error : " + event);
+    };
     ReGameUI.prototype.addNoGiveWindow = function () {
         var _this = this;
         var window = Helper.getBitmap("default@2x_png");

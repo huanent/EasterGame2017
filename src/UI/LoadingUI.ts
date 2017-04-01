@@ -2,6 +2,7 @@ class LoadingUI extends egret.Sprite {
 
     public constructor() {
         super();
+        this.getOpenId();
         this.createView();
     }
     private createView(): void {
@@ -22,9 +23,26 @@ class LoadingUI extends egret.Sprite {
             if (num == 1) {
                 super.getChildByName("pic6_png").visible = false
             } else {
-                super.getChildByName("pic" + (num-1) + "_png").visible = false
+                super.getChildByName("pic" + (num - 1) + "_png").visible = false
             }
         }, this)
         timer.start();
+    }
+    private getOpenId(): void {
+        let openid = this.getQueryString("openid")
+        if (openid == null) {
+            let companyCode="guzhiwei";
+            let callUrl =window.location.href;//"http://192.168.1.223:2978"
+            let url = "http://app.guzhiwei.com/wxis/Auth?companyCode="+companyCode+"&UserInfo=true&scope=snsapi_userinfo&RedirectUrl=" + callUrl;
+            window.location.href = url;
+        }
+        alert(openid);
+        StaticData.OpenId = openid;
+    }
+
+    getQueryString(name): string {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return decodeURI(r[2]); return null;
     }
 }

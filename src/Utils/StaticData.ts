@@ -1,0 +1,3 @@
+class StaticData {
+    static OpenId = "";
+}

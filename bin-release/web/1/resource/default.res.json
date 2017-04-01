@@ -149,11 +149,6 @@
 			"name": "egg_mp3"
 		},
 		{
-			"url": "assets/rabit.wav",
-			"type": "sound",
-			"name": "rabit_wav"
-		},
-		{
 			"url": "assets/jieguo_bg_1.png",
 			"type": "image",
 			"name": "jieguo_bg_1_png"
@@ -179,14 +174,19 @@
 			"name": "rules_btn-@2x_png"
 		},
 		{
-			"name": "rules_bg@2x_png",
+			"url": "assets/rules_bg@2x.png",
 			"type": "image",
-			"url": "assets/rules_bg@2x.png"
+			"name": "rules_bg@2x_png"
 		},
 		{
-			"name": "btn_close@2x_png",
+			"url": "assets/btn_close@2x.png",
 			"type": "image",
-			"url": "assets/btn_close@2x.png"
+			"name": "btn_close@2x_png"
+		},
+		{
+			"url": "assets/rabit.mp3",
+			"type": "sound",
+			"name": "rabit_wav"
 		}
 	]
 }
