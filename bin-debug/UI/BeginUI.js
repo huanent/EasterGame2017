@@ -30,7 +30,7 @@ var BeginUI = (function (_super) {
         var _this = this;
         this.btn = Helper.getBitmap(R.begin_btn_png);
         Helper.ObjectCenterX(this.btn);
-        this.btn.y = Helper.height - 350;
+        this.btn.y = Helper.height - 500;
         this.btn.y += 500;
         _super.prototype.addChild.call(this, this.btn);
         this.btn.touchEnabled = true;
@@ -39,9 +39,17 @@ var BeginUI = (function (_super) {
         }, this);
         this.btnRule = Helper.getBitmap("rules_btn-@2x_png");
         Helper.ObjectCenterX(this.btnRule);
-        this.btnRule.y = Helper.height - 200;
+        this.btnRule.y = Helper.height - 350;
         this.btnRule.y += 500;
         this.btnRule.touchEnabled = true;
+        this.btnCoupon = Helper.getBitmap("mycard_btn@2x_png");
+        Helper.ObjectCenterX(this.btnCoupon);
+        this.btnCoupon.y = Helper.height - 200;
+        this.btnCoupon.y += 500;
+        this.btnCoupon.touchEnabled = true;
+        this.btnCoupon.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            window.location.href = "http://manager.luyuangzw.com:11000/Coupon/MyCoupon?mch=guzhiwei";
+        }, this);
         this.btnRule.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             var bg = new egret.Shape();
             bg.graphics.beginFill(0, 0.8);
@@ -64,6 +72,7 @@ var BeginUI = (function (_super) {
             }, _this);
         }, this);
         _super.prototype.addChild.call(this, this.btnRule);
+        _super.prototype.addChild.call(this, this.btnCoupon);
     };
     BeginUI.prototype.addTitle = function () {
         this.title = Helper.getBitmap(R.begin_title_png);
@@ -82,6 +91,10 @@ var BeginUI = (function (_super) {
             .get(this.btnRule)
             .wait(100)
             .to({ y: this.btnRule.y - 500 }, 1000, egret.Ease.sineOut);
+        egret.Tween
+            .get(this.btnCoupon)
+            .wait(200)
+            .to({ y: this.btnCoupon.y - 500 }, 1000, egret.Ease.sineOut);
     };
     BeginUI.prototype.finishAnimation = function (call) {
         egret.Tween
@@ -95,6 +108,9 @@ var BeginUI = (function (_super) {
         egret.Tween
             .get(this.btnRule)
             .to({ y: this.btnRule.y + 500 }, 1000, egret.Ease.sineIn);
+        egret.Tween
+            .get(this.btnCoupon)
+            .to({ y: this.btnCoupon.y + 500 }, 1000, egret.Ease.sineIn);
     };
     BeginUI.addBeginUI = function (parent, call) {
         var beginUI = new BeginUI();

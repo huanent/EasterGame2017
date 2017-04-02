@@ -36,7 +36,7 @@ class LoadingUI extends egret.Sprite {
             let url = "http://app.guzhiwei.com/wxis/Auth?companyCode="+companyCode+"&UserInfo=true&scope=snsapi_userinfo&RedirectUrl=" + callUrl;
             window.location.href = url;
         }
-        alert(openid);
+        //alert(openid);
         StaticData.OpenId = openid;
     }
 

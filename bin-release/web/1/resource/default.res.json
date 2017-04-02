@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "egret_icon_png,description_json,begin_btn_png,begin_title_png,bg_png,icon_music_close_png,icon_music_open_png,pz_mp3,rules_btn-@2x_png,rules_bg@2x_png,btn_close@2x_png",
+			"keys": "egret_icon_png,description_json,begin_btn_png,begin_title_png,bg_png,icon_music_close_png,icon_music_open_png,pz_mp3,rules_btn-@2x_png,rules_bg@2x_png,btn_close@2x_png,mycard_btn@2x_png",
 			"name": "preload"
 		},
 		{
@@ -187,6 +187,11 @@
 			"url": "assets/rabit.mp3",
 			"type": "sound",
 			"name": "rabit_wav"
+		},
+		{
+			"url": "assets/mycard_btn@2x.png",
+			"type": "image",
+			"name": "mycard_btn@2x_png"
 		}
 	]
 }

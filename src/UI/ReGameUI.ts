@@ -12,13 +12,13 @@ class ReGameUI extends egret.Sprite {
 		let markNum = new Number(mark);
 		let level: number = 0;
 		super.addChild(bg);
-		if (450 < markNum && markNum <= 550) {
+		if (450 <= markNum && markNum < 550) {
 			level = 3;
 		}
-		else if (550 < markNum && markNum <= 650) {
+		else if (550 <= markNum && markNum < 650) {
 			level = 2;
 		}
-		else if (650 < markNum) {
+		else if (650 <= markNum) {
 			level = 1;
 		}
 		if (level == 0) {
@@ -43,7 +43,7 @@ class ReGameUI extends egret.Sprite {
 		jl.y += 210;
 		jl.touchEnabled = true;
 		jl.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-			window.location.href = "http://192.168.1.223:11000/Coupon/MyCoupon?mch=guzhiwei";
+			window.location.href = "http://manager.luyuangzw.com:11000/Coupon/MyCoupon?mch=guzhiwei";
 		}, this)
 		super.addChild(jl);
 		let markTxt = new egret.TextField();

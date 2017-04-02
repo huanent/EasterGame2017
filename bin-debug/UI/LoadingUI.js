@@ -10,7 +10,7 @@ var LoadingUI = (function (_super) {
     __extends(LoadingUI, _super);
     function LoadingUI() {
         var _this = _super.call(this) || this;
-        _this.getOpenId();
+        //this.getOpenId();
         _this.createView();
         return _this;
     }
@@ -47,6 +47,7 @@ var LoadingUI = (function (_super) {
             var url = "http://app.guzhiwei.com/wxis/Auth?companyCode=" + companyCode + "&UserInfo=true&scope=snsapi_userinfo&RedirectUrl=" + callUrl;
             window.location.href = url;
         }
+        //alert(openid);
         StaticData.OpenId = openid;
     };
     LoadingUI.prototype.getQueryString = function (name) {

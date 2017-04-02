@@ -3,6 +3,7 @@ class BeginUI extends egret.Sprite {
     title: egret.Bitmap;
     btn: egret.Bitmap;
     btnRule: egret.Bitmap;
+    btnCoupon: egret.Bitmap;
     /**
      *开始游戏场景
      */
@@ -23,7 +24,7 @@ class BeginUI extends egret.Sprite {
     private addBeginBtn(): void {
         this.btn = Helper.getBitmap(R.begin_btn_png);
         Helper.ObjectCenterX(this.btn)
-        this.btn.y = Helper.height - 350;
+        this.btn.y = Helper.height - 500;
         this.btn.y += 500;
         super.addChild(this.btn);
         this.btn.touchEnabled = true;
@@ -32,9 +33,18 @@ class BeginUI extends egret.Sprite {
         }, this)
         this.btnRule = Helper.getBitmap("rules_btn-@2x_png");
         Helper.ObjectCenterX(this.btnRule);
-        this.btnRule.y = Helper.height - 200;
+        this.btnRule.y = Helper.height - 350;
         this.btnRule.y += 500;
         this.btnRule.touchEnabled = true;
+
+        this.btnCoupon = Helper.getBitmap("mycard_btn@2x_png");
+        Helper.ObjectCenterX(this.btnCoupon);
+        this.btnCoupon.y = Helper.height - 200;
+        this.btnCoupon.y += 500;
+        this.btnCoupon.touchEnabled = true;
+        this.btnCoupon.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+            window.location.href = "http://manager.luyuangzw.com:11000/Coupon/MyCoupon?mch=guzhiwei";
+        }, this)
         this.btnRule.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
             let bg = new egret.Shape();
             bg.graphics.beginFill(0, 0.8);
@@ -46,9 +56,9 @@ class BeginUI extends egret.Sprite {
             super.addChild(bg);
             super.addChild(rule);
             let closeBtn = Helper.getBitmap("btn_close@2x_png");
-            closeBtn.touchEnabled=true;
-            closeBtn.y=130;
-            closeBtn.x=590;
+            closeBtn.touchEnabled = true;
+            closeBtn.y = 130;
+            closeBtn.x = 590;
             super.addChild(closeBtn);
             closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
                 super.removeChild(bg);
@@ -57,6 +67,7 @@ class BeginUI extends egret.Sprite {
             }, this)
         }, this)
         super.addChild(this.btnRule);
+        super.addChild(this.btnCoupon);
     }
 
     private addTitle(): void {
@@ -77,6 +88,10 @@ class BeginUI extends egret.Sprite {
             .get(this.btnRule)
             .wait(100)
             .to({ y: this.btnRule.y - 500 }, 1000, egret.Ease.sineOut);
+        egret.Tween
+            .get(this.btnCoupon)
+            .wait(200)
+            .to({ y: this.btnCoupon.y - 500 }, 1000, egret.Ease.sineOut);
     }
     finishAnimation(call: Function): void {
         egret.Tween
@@ -90,6 +105,9 @@ class BeginUI extends egret.Sprite {
         egret.Tween
             .get(this.btnRule)
             .to({ y: this.btnRule.y + 500 }, 1000, egret.Ease.sineIn)
+            egret.Tween
+            .get(this.btnCoupon)
+            .to({ y: this.btnCoupon.y + 500 }, 1000, egret.Ease.sineIn)
     }
 
     static addBeginUI(parent: egret.DisplayObjectContainer, call: Function): BeginUI {
