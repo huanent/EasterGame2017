@@ -988,7 +988,13 @@ var egret;
             var end = false;
             if (t >= this.duration) {
                 if (this.loop) {
-                    t = t % this.duration;
+                    var newTime = t % this.duration;
+                    if (t > 0 && newTime === 0) {
+                        t = this.duration;
+                    }
+                    else {
+                        t = newTime;
+                    }
                 }
                 else {
                     t = this.duration;
@@ -1494,7 +1500,7 @@ var egret;
         var BasePath = (function (_super) {
             __extends(BasePath, _super);
             function BasePath() {
-                var _this = _super.apply(this, arguments) || this;
+                var _this = _super !== null && _super.apply(this, arguments) || this;
                 /**
                  * the name of this action.
                  * @version Egret 3.1.8
@@ -1529,7 +1535,7 @@ var egret;
         var To = (function (_super) {
             __extends(To, _super);
             function To() {
-                var _this = _super.apply(this, arguments) || this;
+                var _this = _super !== null && _super.apply(this, arguments) || this;
                 /**
                  * Property set of an object
                  * @version Egret 3.1.8
@@ -1590,7 +1596,7 @@ var egret;
         var Wait = (function (_super) {
             __extends(Wait, _super);
             function Wait() {
-                var _this = _super.apply(this, arguments) || this;
+                var _this = _super !== null && _super.apply(this, arguments) || this;
                 /**
                  * Duration
                  * @version Egret 3.1.8
@@ -1638,7 +1644,7 @@ var egret;
         var Set = (function (_super) {
             __extends(Set, _super);
             function Set() {
-                var _this = _super.apply(this, arguments) || this;
+                var _this = _super !== null && _super.apply(this, arguments) || this;
                 /**
                  * Property set of an object
                  * @version Egret 3.1.8
@@ -1673,7 +1679,7 @@ var egret;
         var Tick = (function (_super) {
             __extends(Tick, _super);
             function Tick() {
-                var _this = _super.apply(this, arguments) || this;
+                var _this = _super !== null && _super.apply(this, arguments) || this;
                 /**
                  * Delta time
                  * @version Egret 3.1.8

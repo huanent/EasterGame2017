@@ -1,4 +1,7 @@
 class ReGameUI extends egret.Sprite {
+	isGet: egret.TextField;
+	jl: egret.Bitmap;
+	restart: egret.Bitmap;
 	/**
 	 *重新游戏界面
 	 */
@@ -28,24 +31,41 @@ class ReGameUI extends egret.Sprite {
 		let windows = Helper.getBitmap("jieguo_bg_" + level + "_png")
 		Helper.ObjectCenter(windows)
 		super.addChild(windows);
-		let restart = Helper.getBitmap(R.restart_btn_png)
-		Helper.ObjectCenter(restart);
-		restart.x -= 130;
-		restart.y += 210;
-		restart.touchEnabled = true;
-		restart.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+		this.restart = Helper.getBitmap(R.restart_btn_png)
+		Helper.ObjectCenter(this.restart);
+		this.restart.x -= 130;
+		this.restart.y += 210;
+		this.restart.touchEnabled = true;
+		this.restart.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.dispatchEvent(new TapEvent(TapEvent.NAME));
 		}, this)
-		super.addChild(restart);
-		let jl = Helper.getBitmap(R.jiangli_btn_png)
-		Helper.ObjectCenter(jl)
-		jl.x += 130;
-		jl.y += 210;
-		jl.touchEnabled = true;
-		jl.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-			window.location.href = "http://manager.luyuangzw.com:11000/Coupon/MyCoupon?mch=guzhiwei";
+		super.addChild(this.restart);
+		this.jl = Helper.getBitmap(R.jiangli_btn_png)
+		Helper.ObjectCenter(this.jl)
+		this.jl.x += 130;
+		this.jl.y += 210;
+		this.jl.touchEnabled = true;
+		this.jl.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+			var request = new egret.HttpRequest();
+			request.responseType = egret.HttpResponseType.TEXT;
+			//request.open("http://192.168.1.223:11000/wxapi/Activity/EasterDay2017/Play?openid=" + StaticData.OpenId + "&prizeType=" + level, egret.HttpMethod.POST);
+			request.open("http://manager.luyuangzw.com:11000/wxapi/Activity/EasterDay2017/Play?openid=" + StaticData.OpenId + "&prizeType=" + level, egret.HttpMethod.POST);
+			alert(StaticData.OpenId);
+			alert(level);
+			//设置响应头
+			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			//发送参数
+			request.send();
+			request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
+				var request = <egret.HttpRequest>event.currentTarget;
+				let isCan = JSON.parse(request.response).Data;
+				//alert(isCan)
+				//alert(request.response)
+				//window.location.href = "http://192.168.1.223:11000/Coupon/MyCoupon?mch=guzhiwei";
+				window.location.href = "http://manager.luyuangzw.com:11000/Coupon/MyCoupon?mch=guzhiwei";
+			}, this);
 		}, this)
-		super.addChild(jl);
+		super.addChild(this.jl);
 		let markTxt = new egret.TextField();
 		markTxt.textColor = 0xffffff;
 		markTxt.size = 40;
@@ -57,7 +77,8 @@ class ReGameUI extends egret.Sprite {
 		if (level > 0) {
 			var request = new egret.HttpRequest();
 			request.responseType = egret.HttpResponseType.TEXT;
-			request.open("http://192.168.1.223:11000/wxapi/Activity/EasterDay2017/Play?openid=" + StaticData.OpenId + "&prizeType=" + level, egret.HttpMethod.POST);
+			//	request.open("http://192.168.1.223:11000/wxapi/Activity/EasterDay2017/Check?openID="+StaticData.OpenId+"&prizeType="+level,egret.HttpMethod.GET);
+			request.open("http://manager.luyuangzw.com:11000/wxapi/Activity/EasterDay2017/Check?openID=" + StaticData.OpenId + "&prizeType=" + level, egret.HttpMethod.GET);
 			//设置响应头
 			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			//发送参数
@@ -68,15 +89,17 @@ class ReGameUI extends egret.Sprite {
 	}
 	private onGetComplete(event: egret.Event): void {
 		var request = <egret.HttpRequest>event.currentTarget;
-		let v =JSON.parse(request.response).Data;
+		let isCan = JSON.parse(request.response).Data;
 		//alert(request.response);
-		if (!v) {
-			let isGet = new egret.TextField();
-			isGet.text = "已领取过奖励";
-			isGet.textColor = 0xddaf5c;
-			Helper.ObjectCenter(isGet);
-			isGet.y += 130;
-			super.addChild(isGet);
+		if (!isCan) {
+			this.isGet = new egret.TextField();
+			this.isGet.text = "已领取过奖励";
+			this.isGet.textColor = 0xddaf5c;
+			Helper.ObjectCenter(this.isGet);
+			this.isGet.y += 130;
+			super.addChild(this.isGet);
+			this.jl.visible = false;
+			Helper.ObjectCenterX(this.restart);
 		}
 	}
 	private onGetIOError(event: egret.IOErrorEvent): void {

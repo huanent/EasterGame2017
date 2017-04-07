@@ -90,7 +90,7 @@ class Main extends egret.DisplayObjectContainer {
     private addBeginUI(): void {
         let beginUI = BeginUI.addBeginUI(this, () => {
             this.addGameUI();
-        })
+        },this.loadingView.IsSub)
         // if (this.isfirst) {
         //     beginUI.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
         //         this.musicPlayUI.musicControl = this.musicPlayUI.music.play();

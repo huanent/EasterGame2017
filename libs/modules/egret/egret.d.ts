@@ -1722,7 +1722,7 @@ declare namespace egret {
          * @platform Web
          * @language zh_CN
          */
-        filters: Array<Filter>;
+        filters: Array<Filter | CustomFilter>;
         /**
          * @private
          * 获取filters
@@ -1876,7 +1876,7 @@ declare namespace egret {
         /**
          * @private
          */
-        $measureFiltersOffset(): any;
+        private $measureFiltersOffset(fromParent);
         /**
          * @private
          * 获取相对于指定根节点的连接矩阵。
@@ -2397,7 +2397,12 @@ declare namespace egret {
          * @platform Web,Native
          */
         type: string;
+        /**
+         * @private
+         */
+        $uniforms: any;
         private $targets;
+        constructor();
         $addTarget(target: DisplayObject): void;
         $removeTarget(target: DisplayObject): void;
         protected invalidate(): void;
@@ -6394,6 +6399,14 @@ declare namespace egret {
         /**
          * @private
          */
+        blurXFilter: IBlurXFilter;
+        /**
+         * @private
+         */
+        blurYFilter: IBlurYFilter;
+        /**
+         * @private
+         */
         $quality: number;
         /**
          * The amount of horizontal blur.
@@ -6433,6 +6446,22 @@ declare namespace egret {
          * @private
          */
         $toJson(): string;
+    }
+    /**
+     * @private
+     */
+    interface IBlurXFilter extends Filter {
+        type: string;
+        $uniforms: any;
+        blurX: number;
+    }
+    /**
+     * @private
+     */
+    interface IBlurYFilter extends Filter {
+        type: string;
+        $uniforms: any;
+        blurY: number;
     }
 }
 declare namespace egret {
@@ -6499,6 +6528,58 @@ declare namespace egret {
          * @private
          */
         $toJson(): string;
+    }
+}
+declare namespace egret {
+    /**
+     * custom filter, now support WebGL mode only.
+     * @version Egret 4.1.0
+     * @platform Web
+     * @language en_US
+     */
+    /**
+     * 自定义滤镜，目前仅支持WebGL模式
+     * @version Egret 4.1.0
+     * @platform Web
+     * @language zh_CN
+     */
+    class CustomFilter extends Filter {
+        /**
+         * @private
+         */
+        $vertexSrc: string;
+        /**
+         * @private
+         */
+        $fragmentSrc: string;
+        /**
+         * @private
+         */
+        $shaderKey: string;
+        /**
+         * @private
+         */
+        type: string;
+        /**
+         * 滤镜的内边距
+         * 如果自定义滤镜所需区域比原区域大（描边等），需要手动设置
+         * @version Egret 4.1.0
+         * @platform Web
+         * @language zh_CN
+         */
+        padding: number;
+        readonly uniforms: any;
+        /**
+         * 初始化 CustomFilter 对象
+         * @method egret.CustomFilter#constructor
+         * @param vertexSrc {string} 自定义的顶点着色器程序。
+         * @param fragmentSrc {string} 自定义的片段着色器程序。
+         * @param uniforms {any} 着色器中uniform的初始值（key，value一一对应），目前仅支持数字和数组。
+         * @version Egret 4.1.0
+         * @platform Web
+         * @language zh_CN
+         */
+        constructor(vertexSrc: string, fragmentSrc: string, uniforms?: any);
     }
 }
 declare namespace egret {
@@ -7728,12 +7809,6 @@ declare namespace egret.localStorage {
      * @language zh_CN
      */
     let clear: () => void;
-}
-declare namespace egret {
-    /**
-     * 打开照片选择窗口，返回Promise对象，resolve参数为ArrayBuffer类型的照片数据,可以使用BitmapData的create方法将ArrayBuffer构造为BitmapData实例
-     */
-    function pickPhoto(): Promise<ArrayBuffer>;
 }
 declare namespace egret.sys {
     /**
@@ -10472,7 +10547,7 @@ declare namespace egret {
         /**
          * @private
          */
-        private createRenderBuffer(width, height);
+        private createRenderBuffer(width, height, useForFilters?);
     }
 }
 declare namespace egret {

@@ -10,7 +10,7 @@ var LoadingUI = (function (_super) {
     __extends(LoadingUI, _super);
     function LoadingUI() {
         var _this = _super.call(this) || this;
-        //this.getOpenId();
+        // this.getOpenId();
         _this.createView();
         return _this;
     }

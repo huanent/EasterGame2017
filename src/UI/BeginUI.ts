@@ -4,17 +4,39 @@ class BeginUI extends egret.Sprite {
     btn: egret.Bitmap;
     btnRule: egret.Bitmap;
     btnCoupon: egret.Bitmap;
+    isSub: boolean;
     /**
      *开始游戏场景
      */
-    constructor() {
+    constructor(isSub: boolean) {
         super();
+        this.isSub = isSub;
         this.initView();
     }
     private initView(): void {
         this.addBg();
         this.addTitle();
         this.addBeginBtn();
+        if (!this.isSub) {
+            let bg = new egret.Shape();
+            bg.graphics.beginFill(0, 0.8);
+            bg.graphics.drawRect(-1, -1, Helper.width + 1, Helper.height + 1);
+            bg.graphics.endFill();
+            bg.touchEnabled = true;
+            super.addChild(bg);
+            let qr = document.getElementById("qr");
+            qr.style.visibility = "visible";
+            let subText = new egret.TextField();
+            subText.text = "长按识别二维码，关注公众号";
+            Helper.ObjectCenter(subText);
+            subText.y += 230;
+            super.addChild(subText);
+            let subText2 = new egret.TextField();
+            subText2.text = "点击“开始游戏”，开始“抓兔子砸彩蛋”游戏。";
+            Helper.ObjectCenter(subText2);
+            subText2.y += 270;
+            super.addChild(subText2);
+        }
 
     }
     private addBg(): void {
@@ -43,6 +65,7 @@ class BeginUI extends egret.Sprite {
         this.btnCoupon.y += 500;
         this.btnCoupon.touchEnabled = true;
         this.btnCoupon.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+           // window.location.href = "http://192.168.1.223:11000/Coupon/MyCoupon?mch=guzhiwei";
             window.location.href = "http://manager.luyuangzw.com:11000/Coupon/MyCoupon?mch=guzhiwei";
         }, this)
         this.btnRule.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
@@ -105,13 +128,13 @@ class BeginUI extends egret.Sprite {
         egret.Tween
             .get(this.btnRule)
             .to({ y: this.btnRule.y + 500 }, 1000, egret.Ease.sineIn)
-            egret.Tween
+        egret.Tween
             .get(this.btnCoupon)
             .to({ y: this.btnCoupon.y + 500 }, 1000, egret.Ease.sineIn)
     }
 
-    static addBeginUI(parent: egret.DisplayObjectContainer, call: Function): BeginUI {
-        let beginUI: BeginUI = new BeginUI();
+    static addBeginUI(parent: egret.DisplayObjectContainer, call: Function, isSub: boolean): BeginUI {
+        let beginUI: BeginUI = new BeginUI(isSub);
         parent.addChild(beginUI);
         beginUI.beginAnimation();
         beginUI.addEventListener(TapEvent.NAME, () => {

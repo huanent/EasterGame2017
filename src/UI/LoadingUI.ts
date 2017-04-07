@@ -1,4 +1,5 @@
 class LoadingUI extends egret.Sprite {
+    IsSub = false;
 
     public constructor() {
         super();
@@ -30,14 +31,20 @@ class LoadingUI extends egret.Sprite {
     }
     private getOpenId(): void {
         let openid = this.getQueryString("openid")
+        let subscribe: string = this.getQueryString("subscribe")
         if (openid == null) {
-            let companyCode="guzhiwei";
-            let callUrl =window.location.href;//"http://192.168.1.223:2978"
-            let url = "http://app.guzhiwei.com/wxis/Auth?companyCode="+companyCode+"&UserInfo=true&scope=snsapi_userinfo&RedirectUrl=" + callUrl;
+            let companyCode = "guzhiwei";
+            let callUrl = window.location.href;
+            let url = "http://app.guzhiwei.com/wxis/Auth?companyCode=" + companyCode + "&UserInfo=true&scope=snsapi_userinfo&RedirectUrl=" + callUrl;
             window.location.href = url;
+        }
+        if (subscribe.toString() == "0") {
+            this.IsSub=false;
+            return;
         }
         //alert(openid);
         StaticData.OpenId = openid;
+        this.IsSub=true;
     }
 
     getQueryString(name): string {
